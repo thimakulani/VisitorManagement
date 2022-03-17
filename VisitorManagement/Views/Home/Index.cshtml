@@ -1,0 +1,38 @@
+﻿@model VisitorManagement.Models.Admin
+
+@{
+    Layout = "_Login";
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <div class="text-center page-heade">
+        <h2>LEGAL &amp; DEPT MANAGEMENT</h2>
+    </div>
+    <center>
+
+        <div class="row justify-content-center">
+            <form method="post" asp-action="Index">
+                <div class="justify-content-center">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                Wellcome
+                            </div>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="card-body">
+                                <input type="text" asp-for="Email" class="w-100 form-control m-1" placeholder="Email" />
+                                <input type="text" asp-for="Password" class="w-100 form-control m-1" placeholder="Password" />
+                                <input type="submit" value="LOGIN" class="w-100 form-control m-1 btn btn-primary"  />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+     </center>
+</div>
+
+

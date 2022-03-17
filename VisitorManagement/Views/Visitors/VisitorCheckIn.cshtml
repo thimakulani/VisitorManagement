@@ -1,0 +1,382 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<style>
+    .body-div {
+        background-image: url('../../img/bg.png');
+        background-size: 100% 100%;
+        background-attachment: fixed;
+        background-size: cover;
+        height: 100%;
+    }
+
+    .center-screen {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 100vh;
+    }
+
+    .card-container.card {
+        max-width: 550px;
+        padding: 40px 40px;
+    }
+
+    .btn {
+        font-weight: 700;
+        height: 36px;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+    }
+
+    /*
+     * Card component
+     */
+    .card {
+        background-color: #F7F7F7;
+        /* just in case there no content*/
+        padding: 20px 25px 30px;
+        margin: 0 auto 25px;
+        margin-top: 50px;
+        /* shadows and rounded borders */
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-img-card {
+        width: 96px;
+        height: 96px;
+        margin: 0 auto 10px;
+        display: block;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+    }
+
+    /*
+     * Form styles
+     */
+    .profile-name-card {
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        margin: 10px 0 0;
+        min-height: 1em;
+    }
+
+    .reauth-email {
+        display: block;
+        color: #404040;
+        line-height: 2;
+        margin-bottom: 10px;
+        font-size: 14px;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .form-signin #inputEmail,
+    .form-signin #inputPassword {
+        direction: ltr;
+        height: 44px;
+        font-size: 16px;
+    }
+
+    .form-signin input[type=email],
+    .form-signin input[type=password],
+    .form-signin input[type=text],
+    .form-signin button {
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+        z-index: 1;
+        position: relative;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .form-signin .form-control:focus {
+        border-color: rgb(104, 145, 162);
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+    }
+
+    .btn.btn-signin {
+        /*background-color: #4d90fe; */
+        background-color: #007AAE;
+        /* background-color: linear-gradient(rgb(104, 145, 162), #007AAE);*/
+        padding: 0px;
+        font-weight: 700;
+        font-size: 14px;
+        height: 36px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        border: none;
+        -o-transition: all 0.218s;
+        -moz-transition: all 0.218s;
+        -webkit-transition: all 0.218s;
+        transition: all 0.218s;
+    }
+
+        .btn.btn-signin:hover,
+        .btn.btn-signin:active,
+        .btn.btn-signin:focus {
+            background-color: #007AAE;
+        }
+
+</style>
+<style>
+    .how-section1 {
+        margin-top: -15%;
+        padding: 10%;
+    }
+
+        .how-section1 h4 {
+            color: #ffa500;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        .how-section1 .subheading {
+            color: #3931af;
+            font-size: 20px;
+        }
+
+        .how-section1 .row {
+            margin-top: 10%;
+        }
+
+    .how-img {
+        text-align: center;
+    }
+
+        .how-img img {
+            width: 40%;
+        }
+
+</style>
+<div class="body-div center-screen">
+    <div class="container">
+        <div class="card card-container">
+
+            <form class="form-signin" method="POST" action="" enctype="multipart/form-data">
+
+                <div>
+                    <img width="200" height="150" class="rounded-circle"
+                         src="" />
+                </div>
+
+                <h2>
+                    <b>
+                        Hi <br />
+                    </b>
+                </h2>
+                <p>Welcome Back</p>
+                <br>
+                <select onchange="specify(this.name, this);" class="form-control" name="purpose" required>
+                    <option class="hidden" selected disabled>
+                        -- Reason for visiting? --
+                    </option>
+                    <option value="Official">Official</option>
+                    <option value="Contractor">Contractor</option>
+                    <option value="Deliver Documents per Hand">Deliver Documents per Hand</option>
+                    <option value="Event">Event</option>
+                    <option value="Inquiry">Inquiry</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div style="margin:5px" id="hold">
+                </div>
+                <select class="form-control" name="whom" required>
+                    <option class="hidden" selected disabled>
+                        -- Appointment with whom? --
+                    </option>
+                    <option value="Other">Any-Other</option>
+                    <option value="Mpho Seriti">
+                        Mpho Seriti
+                    </option>
+                    <option value="Nancy Mogodi">
+                        Nancy Mogodi
+                    </option>
+                    <option value="Ben Gurion">
+                        Ben Gurion
+                    </option>
+                    <option value="Thima">
+                        Thima
+                    </option>
+                    <option value="Thima">
+                        Thima
+                    </option>
+                    <option value="Mara Kriel">
+                        Mara Kriel
+                    </option>
+                </select>
+                 <div style="margin:5px" id="hold">
+                </div>
+                <input type="text" name="temp" class="form-control" placeholder="Temperature *" value="" required><br>
+                <div class="container">
+                    <h2>Health checker</h2>
+                    <p>Have you experienced any of the following: Yes/No</p>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Yes</th>
+                                <th>No</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Fever</td>
+                                <td><label for="q1_fever"><input type="radio" name="q1_fever" id="q1_fever" value="yes" /></label></td>
+                                <td><label for="q1_fever"><input type="radio" name="q1_fever" id="q1_fever" value="no" /></label></td>
+                            </tr>
+                            <tr>
+                                <td>Shortness of breath</td>
+                                <td><label for="q1-y"><input class="inputabs" type="radio" name="q1_breath" id="q1_breath" value="yes" /></label></td>
+                                <td><label for="q1-n"><input class="inputabs" type="radio" name="q1_breath" id="q1_breath" value="no" /></label></td>
+                            </tr>
+                            <tr>
+                                <td>Sore throat</td>
+                                <td><label for="q1-y"> <input type="radio" name="q1_throat" id="q1_throat" value="yes" /></label></td>
+                                <td><label for="q1-n"><input type="radio" name="q1_throat" id="q1_throat" value="no" /></label></td>
+                            </tr>
+                            <tr>
+                                <td>Loss of taste or smell</td>
+                                <td><label for="q1-y"><input type="radio" name="q1_taste" id="q1_taste" value="yes" /></label></td>
+                                <td><label for="q1-n"><input type="radio" name="q1_taste" id="q1_taste" value="no" /></label></td>
+                            </tr>
+                            <tr>
+                                <td>Cough</td>
+                                <td><input type="radio" name="q1_cough" id="q1_cough" value="yes" /></td>
+                                <td><input type="radio" name="q1_cough" id="q1_cough" value="no" /></td>
+                            </tr>
+                            <tr>
+                                <td>Muscle Pain</td>
+                                <td><input type="radio" name="q1_muscle_pain" id="q1_muscle_pain" value="yes" /></td>
+                                <td><input type="radio" name="q1_muscle_pain" id="q1_muscle_pain" value="no" /></td>
+                            </tr>
+
+                            <tr>
+                                <td>Other (Vomit, Diarrhea, Headache, and e.t.c)</td>
+                                <td><input type="radio" name="q1_others" id="q1_others" value="yes" /></td>
+                                <td><input type="radio" name="q1_others" id="q1_others" value="no" /></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+                <div>
+
+                    <table class="table">
+                        <tr>
+                            <td style="text-align: left">
+                                Have you attended any mass gatherings (such as funeral)?
+                            </td>
+                            <td>
+                                <label>Yes<input type="radio" name="q1_funeral" id="q1_funeral" value="yes" /></label>
+                            </td>
+                            <td>
+                                <label>No<input type="radio" name="q1_funeral" id="q1_funeral" value="no" /></label>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="input-group" style="margin-bottom: 5px">
+
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="">If yes Where?</span>
+                        </div>
+                        <input type="text" name="q1_funeral_place" value="" />
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="">Date</span>
+                        </div>
+                        <input type="date" name="q1_funeral_date" value="" />
+
+                    </div>
+                </div>
+
+                <div>
+                    <table class="table">
+                        <tr>
+                            <td style="text-align: left">
+                                Have you been to health care facility in the past 14 days?
+                                <input style="display:none;" type="text" name="otherAnswer" id="otherAnswer" />
+
+                            </td>
+                            <td>
+                                <label>Yes<input type="radio" name="q1_healthcare" id="q1_hc" value="yes" /></label>
+
+                            </td>
+                            <td>
+                                <label>No<input type="radio" name="q1_healthcare" id="q1_healthcare" value="no" /></label>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="input-group" style="margin-bottom: 5px">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="">If yes, Facility Name?</span>
+                        </div>
+                        <input type="text" name="q1_healthcare_place" id="q1_healthcare_place" value="">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="">Date</span>
+                        </div>
+                        <input type="date" name="q1_healthcare_date" value="">
+
+                    </div>
+                </div>
+                <select class="form-control" name="asset_type" required>
+                    <option class="hidden" selected disabled>-- Device Type ? --</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Tablet">Tablet</option>
+                    <option value="Cellphone">Cellphone</option>
+                    <option value="Other">Other</option>
+                </select>
+                <br>
+                <input type="text" name="other_asset_type" class="form-control" placeholder="If other, Please specify."
+                       value="">
+                <br>
+
+                <input type="text" name="asset_num" class="form-control" placeholder="Asset/Serial Number" value="" required>
+
+
+
+                <button class="btn btn-lg btn-primary  btn-signin" name="submit" type="submit">Check-In</button>
+            </form><!-- /form -->
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card text-center shadow-lg" style="width: 18rem; background-color: #011100;">
+
+                        <h4 class="text-center">
+                            <a href="register.php" style="color: #ffffff">
+                                <strong><i class="fas fa-times-circle"></i>&nbsp; This is not me </strong>
+                            </a>
+                        </h4>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+</div>
