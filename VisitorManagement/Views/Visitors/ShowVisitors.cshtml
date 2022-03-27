@@ -1,0 +1,86 @@
+﻿@model IEnumerable<VisitorManagement.Models.Visitor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+    <h3><strong>VISITORS</strong></h3>
+</div>
+
+<p>
+    <a asp-action="Create" asp-controller="Visitors" class="btn-sm btn-primary">Create New</a>
+</p>
+<div>
+    <div class="table-responsive-sm">
+        <table class="table table-bordered table-hover">
+            <thead class="flex-wrap">
+                <tr>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Company)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Purpose)
+                    </th>
+                    <th scope="col">
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Company)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Purpose)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            <div class="d-flex">
+                                <a asp-action="Edit" style="margin:2px" class="btn-sm btn-primary" asp-route-id="@item.Id">Edit</a>
+                                <a asp-action="Details" class="btn-sm btn-primary" style="margin:2px" asp-route-id="@item.Id">Details</a>
+                                <a asp-action="Delete" class="bt-sm btn-danger" style="margin:2px" asp-route-id="@item.Id">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

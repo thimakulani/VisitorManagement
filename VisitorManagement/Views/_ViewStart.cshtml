@@ -1,8 +1,8 @@
-﻿@inject SignInManager<ApplicationUser> identityUser;
+﻿@inject SignInManager<Admin> identityUser;
 @{
     @if (!identityUser.IsSignedIn(User))
     {
-        Layout = "_Login";
+        Layout = "_Layout";
     }
     else
     {

@@ -1,7 +1,7 @@
 ﻿@using VisitorManagement.Service;
 @model DashboardStats;
 @{
-    Layout = "_Layout";
+    
 }
 <div class="card">
     <div class="card-header">
@@ -9,127 +9,127 @@
     </div>
     <div class="card-body">
         <div class="row">
-          <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-info">
-              <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-info">
+                    <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
 
-              <div class="info-box-content">
-                <span class="info-box-text">VISITORS CHECKED-IN</span>
-                <span class="info-box-number">TODAY</span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">VISITORS CHECKED-IN</span>
+                        <span class="info-box-number">TODAY</span>
 
-                <div class="progress">
-                  <div class="progress-bar" style="width: 100%"></div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <span class="progress-description">
+                            @Model.CheckInCounter
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
                 </div>
-                <span class="progress-description">
-                  @Model.CheckInCounter
-                </span>
-              </div>
-              <!-- /.info-box-content -->
+                <!-- /.info-box -->
             </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-success">
-              <span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-success">
+                    <span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
 
-              <div class="info-box-content">
-                <span class="info-box-text">VISITORS CHECKED-OUT</span>
-                <span class="info-box-number">TODAY</span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">VISITORS CHECKED-OUT</span>
+                        <span class="info-box-number">TODAY</span>
 
-                <div class="progress">
-                  <div class="progress-bar" style="width: 100%"></div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <span class="progress-description">
+                            @Model.CheckInCounter
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
                 </div>
-                <span class="progress-description">
-                  @Model.CheckInCounter
-                </span>
-              </div>
-              <!-- /.info-box-content -->
+                <!-- /.info-box -->
             </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-warning">
-              <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-warning">
+                    <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
 
-              <div class="info-box-content">
-                <span class="info-box-text">EMPLOYEES CHECKED-IN</span>
-                <span class="info-box-number">TODAY</span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">EMPLOYEES CHECKED-IN</span>
+                        <span class="info-box-number">TODAY</span>
 
-                <div class="progress">
-                  <div class="progress-bar" style="width: 100%"></div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <span class="progress-description">
+                            @Model.CheckInCounter
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
                 </div>
-                <span class="progress-description">
-                  @Model.CheckInCounter
-                </span>
-              </div>
-              <!-- /.info-box-content -->
+                <!-- /.info-box -->
             </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
-          <div class="col-md-3 col-sm-6 col-12">
-            <div class="info-box bg-danger">
-              <span class="info-box-icon"><i class="fas fa-comments"></i></span>
+            <!-- /.col -->
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-danger">
+                    <span class="info-box-icon"><i class="fas fa-comments"></i></span>
 
-              <div class="info-box-content">
-                <span class="info-box-text">EMPLOYEES CHECKED-OUT</span>
-                <span class="info-box-number">TODAY</span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">EMPLOYEES CHECKED-OUT</span>
+                        <span class="info-box-number">TODAY</span>
 
-                <div class="progress">
-                  <div class="progress-bar" style="width: 100%"></div>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 100%"></div>
+                        </div>
+                        <span class="progress-description">
+                            @Model.CheckInCounter
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
                 </div>
-                <span class="progress-description">
-                  @Model.CheckInCounter
-                </span>
-              </div>
-              <!-- /.info-box-content -->
+                <!-- /.info-box -->
             </div>
-            <!-- /.info-box -->
-          </div>
-          <!-- /.col -->
+            <!-- /.col -->
         </div>
     </div>
 
-    
+
 
 </div>
 
 <div class="card">
     <div class="card-body">
         <div class="row">
-        	  <div class="col-sm-6">
-        		    <div class="card text-center shadow-lg" style="background-color: #8BB004;">
-        			      <div class="card-body">
-        			        	<h2 class="card-text btn" ><a asp-area="" asp-controller="Visitors" asp-action="CheckIn" style="color: #ffffff" target="_blank"><i class="fas fa-handshake"></i> <strong>&nbsp; Visitors Check-In </strong></a> </h2>
-        			      </div>
-        		    </div>
-        	  </div>
-        	  <div class="col-sm-6">
-        		    <div class="card text-center shadow-lg" style="background-color: #C00000;">
-        			      <div class="card-body">
-        			        	<h2 class="card-text btn" ><a href="logout.php" style="color: #ffffff" target="_blank"><strong><i class="fas fa-user-secret"></i>&nbsp; Visitor Check-Out </strong></a> </h2>
-        			      </div>
-        		    </div>
-        	  </div>
-        	  <div class="col-sm-6">
-        		    <div class="card text-center shadow-lg" style="background-color: #8BB004;">
-        			      <div class="card-body">
-        			        	<h2 class="card-text btn" ><a href="employeelogin.php" style="color: #ffffff" target="_blank"> <strong><i class="fas fa-address-card"></i>&nbsp; Employee Check-In </strong></a> </h2>
-        			      </div>
-        		    </div>
-        	  </div>
+            <div class="col-sm-6">
+                <div class="card text-center shadow-lg" style="background-color: #8BB004;">
+                    <div class="card-body">
+                        <h2 class="card-text btn"><a asp-area="" asp-controller="Visitors" asp-action="CheckIn" style="color: #ffffff"><i class="fas fa-handshake"></i> <strong>&nbsp; Visitors Check-In </strong></a> </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-center shadow-lg" style="background-color: #C00000;">
+                    <div class="card-body">
+                        <h2 class="card-text btn"><a asp-area="" asp-controller="Visitors" asp-action="CheckOut" style="color: #ffffff"><strong><i class="fas fa-user-secret"></i>&nbsp; Visitor Check-Out </strong></a> </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card text-center shadow-lg" style="background-color: #8BB004;">
+                    <div class="card-body">
+                        <h2 class="card-text btn"><a asp-area="" asp-controller="Employees" asp-action="CheckIn" style="color: #ffffff"> <strong><i class="fas fa-address-card"></i>&nbsp; Employee Check-In </strong></a> </h2>
+                    </div>
+                </div>
+            </div>
 
 
-        	  <div class="col-sm-6">
-        		    <div class="card text-center shadow-lg" style="background-color: #C00000;">
-        			      <div class="card-body">
-        			        	<h2 class="card-text btn" ><a href="employeelogout.php" style="color: #ffffff" target="_blank"><strong><i class="fas  fa-street-view"></i>&nbsp; Employee Check-Out </strong></a> </h2>
-        			      </div>
-        		    </div>
-        	  </div>
-          </div>
+            <div class="col-sm-6">
+                <div class="card text-center shadow-lg" style="background-color: #C00000;">
+                    <div class="card-body">
+                        <h2 class="card-text btn"><a asp-area="" asp-controller="Employees" asp-action="EmployeeChecksIn" style="color: #ffffff"><strong><i class="fas  fa-street-view"></i>&nbsp; Employee Check-Out </strong></a> </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

@@ -1,0 +1,183 @@
+﻿@model VisitorManagement.Models.Employee
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<style>
+
+    .body {
+        background-image: url('../../img/bg.png');
+        background-size: 100% 100%;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+
+    .center-screen {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        min-height: 100vh;
+    }
+
+    html {
+        height: 100%;
+        background-repeat: no-repeat;
+        /* background-image: linear-gradient(rgb(104, 145, 162), #007AAE);*/
+    }
+
+    .card-container.card {
+        max-width: 450px;
+        padding: 40px 40px;
+    }
+
+    .btn {
+        font-weight: 700;
+        height: 36px;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        cursor: default;
+    }
+
+    /*
+                                                                                                                                             * Card component
+                                                                                                                                             */
+    .card {
+        background-color: #F7F7F7;
+        /* just in case there no content*/
+        padding: 20px 25px 30px;
+        margin: 0 auto 25px;
+        /* shadows and rounded borders */
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .profile-img-card {
+        width: 96px;
+        height: 96px;
+        margin: 0 auto 10px;
+        display: block;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+    }
+
+    /*
+                                                                                                                                             * Form styles
+                                                                                                                                             */
+    .profile-name-card {
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        margin: 10px 0 0;
+        min-height: 1em;
+    }
+
+    .reauth-email {
+        display: block;
+        color: #404040;
+        line-height: 2;
+        margin-bottom: 10px;
+        font-size: 14px;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .form-signin #inputEmail,
+    .form-signin #inputPassword {
+        direction: ltr;
+        height: 44px;
+        font-size: 16px;
+    }
+
+    .form-signin input[type=email],
+    .form-signin input[type=password],
+    .form-signin input[type=text],
+    .form-signin button {
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+        z-index: 1;
+        position: relative;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .form-signin .form-control:focus {
+        border-color: rgb(104, 145, 162);
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+    }
+
+    .btn.btn-signin {
+        /*background-color: #4d90fe; */
+        background-color: #007AAE;
+        /* background-color: linear-gradient(rgb(104, 145, 162), #007AAE);*/
+        padding: 0px;
+        font-weight: 700;
+        font-size: 14px;
+        height: 36px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        border: none;
+        -o-transition: all 0.218s;
+        -moz-transition: all 0.218s;
+        -webkit-transition: all 0.218s;
+        transition: all 0.218s;
+    }
+
+        .btn.btn-signin:hover,
+        .btn.btn-signin:active,
+        .btn.btn-signin:focus {
+            background-color: #007AAE;
+        }
+
+</style>
+<div class="body">
+    <div class="center-screen">
+        <div class="container">
+            <div class="card card-container">
+                <form class="form-signin" method="post" action="">
+                    <h2 class="text-success">
+                        <b>EMPLOYEE CHECK-IN</b>
+                    </h2>
+                    <input type="text" name="persal" class="form-control" placeholder="Persal Number" required autofocus>
+                    <input type="text" name="temp" class="form-control" placeholder="Temperature" required>
+                    <select class="form-control" name="asset_type">
+                        <option class="hidden" selected disabled>
+                            -- Device Type ? --
+                        </option>
+                        <option value="Laptop">Laptop</option>
+                        <option value="Tablet">Tablet</option>
+                        <option value="Cellphone">Cellphone</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input type="text" style="margin-top:7px" name="other_asset_type" class="form-control" placeholder="If other, Please specify."
+                           value="">
+
+                    <input type="text" style="margin-top:7px" name="asset_num" class="form-control" placeholder="Asset/Serial Number" value="">
+
+                    <div class="card">
+                        <p class="card-text" style="text-align: justify;">Good morning, thank you for your contibution today at LDTCS.</p>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" name="submit" type="submit">Check-In</button>
+                </form><!-- /form -->
+            </div><!-- /card-container -->
+        </div>
+    </div>
+</div>

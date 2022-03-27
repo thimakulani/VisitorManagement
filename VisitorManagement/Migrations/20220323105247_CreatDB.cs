@@ -5,28 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VisitorManagement.Migrations
 {
-    public partial class createDb : Migration
+    public partial class CreatDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Admin",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Lastname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Level = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Admin", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -46,8 +28,11 @@ namespace VisitorManagement.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Lastname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Persal = table.Column<int>(type: "int", nullable: false),
+                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Lastname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Level = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -72,19 +57,18 @@ namespace VisitorManagement.Migrations
                 name: "Employees",
                 columns: table => new
                 {
-                    Persal = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Job_title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Company = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name_directorate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Staff_status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Qr_image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Persal = table.Column<int>(type: "int", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Job_title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DirectorateName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Staff_status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Qr_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -108,18 +92,16 @@ namespace VisitorManagement.Migrations
                 name: "Visitor",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Identification = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Temperature = table.Column<double>(type: "float", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Company = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Purpose = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Temperature = table.Column<double>(type: "float", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Company = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Purpose = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -236,22 +218,23 @@ namespace VisitorManagement.Migrations
                 name: "HealthCheck",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Temperature = table.Column<double>(type: "float", nullable: false),
-                    Hc_fevor = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hc_shortness_breath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hc_sore_throat = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hc_loss_taste = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hc_cough = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hc_muscle_pain = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hc_other = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hc_visit_gethering = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hc_gethering_place = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hc_gething_dates = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hc_visit_health_facility = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hc_health_facility_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Hc_health_facility_dates = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Last_check_dates = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Temperature = table.Column<double>(type: "float", nullable: true),
+                    Hc_fevor = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_shortness_breath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_sore_throat = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_loss_taste = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_cough = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_muscle_pain = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_other = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_visit_gethering = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_gethering_place = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_gething_dates = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_visit_health_facility = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_health_facility_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_health_facility_dates = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Last_check_dates = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Persal = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -266,31 +249,70 @@ namespace VisitorManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "VisittorRegister",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Last_login = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Last_logout = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Last_login_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Last_logout_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Suspend_status = table.Column<bool>(type: "bit", nullable: false),
+                    Asset_type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Asset_num = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_fevor = table.Column<bool>(type: "bit", nullable: false),
+                    Hc_shortness_breath = table.Column<bool>(type: "bit", nullable: false),
+                    Hc_sore_throat = table.Column<bool>(type: "bit", nullable: false),
+                    Hc_loss_taste = table.Column<bool>(type: "bit", nullable: false),
+                    Hc_cough = table.Column<bool>(type: "bit", nullable: false),
+                    Hc_muscle_pain = table.Column<bool>(type: "bit", nullable: false),
+                    Hc_other = table.Column<bool>(type: "bit", nullable: false),
+                    Hc_visit_gethering = table.Column<bool>(type: "bit", nullable: false),
+                    Hc_gethering_place = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_gething_dates = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Hc_visit_health_facility = table.Column<bool>(type: "bit", nullable: false),
+                    Hc_health_facility_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Hc_health_facility_dates = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VisitorId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VisittorRegister", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VisittorRegister_Visitor_VisitorId",
+                        column: x => x.VisitorId,
+                        principalTable: "Visitor",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "EmployeeRegister",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Persal = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Temp = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Persal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Temp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Last_login = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Last_logout = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Suspend_status = table.Column<bool>(type: "bit", nullable: false),
-                    Asset_num = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Asset_type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Asset_num = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Asset_type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Last_login_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Last_logout_date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    HealthCheckId = table.Column<int>(type: "int", nullable: false),
-                    HealthCheckId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    HealthCheckId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EmployeeRegister", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeeRegister_HealthCheck_HealthCheckId1",
-                        column: x => x.HealthCheckId1,
+                        name: "FK_EmployeeRegister_HealthCheck_HealthCheckId",
+                        column: x => x.HealthCheckId,
                         principalTable: "HealthCheck",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -333,21 +355,23 @@ namespace VisitorManagement.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeRegister_HealthCheckId1",
+                name: "IX_EmployeeRegister_HealthCheckId",
                 table: "EmployeeRegister",
-                column: "HealthCheckId1");
+                column: "HealthCheckId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HealthCheck_Persal",
                 table: "HealthCheck",
                 column: "Persal");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VisittorRegister_VisitorId",
+                table: "VisittorRegister",
+                column: "VisitorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Admin");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -370,7 +394,7 @@ namespace VisitorManagement.Migrations
                 name: "Temperature");
 
             migrationBuilder.DropTable(
-                name: "Visitor");
+                name: "VisittorRegister");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -380,6 +404,9 @@ namespace VisitorManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "HealthCheck");
+
+            migrationBuilder.DropTable(
+                name: "Visitor");
 
             migrationBuilder.DropTable(
                 name: "Employees");

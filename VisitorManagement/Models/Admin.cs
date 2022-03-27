@@ -1,16 +1,25 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VisitorManagement.Models
 {
-    public class Admin
+    public class Admin : IdentityUser
     {
-        public int Id { get; set; }
+        [Key, Required, DatabaseGenerated(DatabaseGeneratedOption.None), DisplayName("Persal#")]
+        public int Persal { get; set; }
+
+        [Required]
         public string? Firstname { get; set; }
+
+        [Required]
         public string? Lastname { get; set; }
-        public string? Email { get; set; }
-        public string? Password { get; set; }
-        public string? DateCreated { get; set; }
+
+        [Required]
+        public DateTime? DateCreated { get; set; } = DateTime.Now;
+
+        [Required]
         public string? Level { get; set; }
     }
 }

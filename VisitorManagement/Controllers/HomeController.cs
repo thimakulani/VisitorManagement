@@ -9,10 +9,10 @@ namespace VisitorManagement.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly UserManager<Admin> userManager;
+        private readonly SignInManager<Admin> signInManager;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<Admin> userManager, SignInManager<Admin> signInManager)
         {
             _logger = logger;
             this.userManager = userManager;
@@ -24,15 +24,11 @@ namespace VisitorManagement.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Index(Admin admin)
+        public async Task<IActionResult> Index(ApplicationUser admin)
         {
-            if (ModelState.IsValid)
+            if (admin.Email !=null && admin.Password !=null)
             {
-                var user = new ApplicationUser
-                {
-                    UserName = admin.Email,
-                    Email = admin.Email,
-                };
+                
                 var results = await signInManager.PasswordSignInAsync(admin.Email, admin.Password, isPersistent: true, false);
                 if (results.Succeeded)
                 {
@@ -43,37 +39,6 @@ namespace VisitorManagement.Controllers
             return View(admin);
         }
        public IActionResult RegView()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> RegView(Admin admin)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser()
-                {
-                    UserName = admin.Email,
-                    Email = admin.Email,
-
-                };
-                var results = await userManager.CreateAsync(user, admin.Password);
-                if (results.Succeeded)
-                {
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "home");
-                }
-                else
-                {
-                    foreach (var item in results.Errors)
-                    {
-                        ModelState.AddModelError("", item.Description);
-                    }
-                }
-            }
-            return View(admin);
-        }
-        public IActionResult Privacy()
         {
             return View();
         }

@@ -1,0 +1,223 @@
+﻿@model IEnumerable<VisitorManagement.Models.VisittorRegister>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Filter:</label>
+                    <select id='selected' class="form-control" onchange="optionChange()" name="print">
+                        <option>--Select Query--</option>
+                        <option value="all">All</option>
+                        <option value="date">By Specific Date</option>
+                        <option value="btdate">By Date Range</option>
+                        <option value="type">By Type</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4" id="date_range" style="display:none">
+                <div class="form-group">
+                    <label>Start Date:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="far fa-calendar-alt"></i>
+                            </span>
+                        </div>
+                        <input type="date" class="form-control float-right" id="reservation">
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label>End Date:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="far fa-calendar-alt"></i>
+                            </span>
+                        </div>
+                        <input type="date" class="form-control float-right" id="reservation">
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4" id="specific_date" style="display:none">
+                <div class="form-group">
+                    <label>Dates:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="far fa-calendar-alt"></i>
+                            </span>
+                        </div>
+                        <input type="date" class="form-control float-right" id="reservation">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4" style="display:none" id="visits_types">
+                <div class="form-group">
+                    <label>Visit Type:</label>
+                    <select id='type_selected' class="form-control " name="print">
+                        <option>--Select Type--</option>
+                        <option value="all">Official</option>
+                        <option value="intervie">Interview</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4" id="handle">
+
+            <a class="btn btn-primary">Query</a>
+            <a class="btn btn-primary" onclick="printDiv('report')">Print</a>
+
+        </div>
+    </div>
+    <div class="card-body" id="report">
+        <img src="/img/t.png" />
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Visitor.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Visitor.Id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Last_login)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Last_logout_date)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Type)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Temperature)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AppointmentWith)
+                        </th>
+
+                        @* <th></th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Visitor.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Visitor.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Last_login)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Last_logout)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Temperature)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AppointmentWith)
+                            </td>
+                            @*
+                                <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            *@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="./plugins/select2/js/select2.full.min.js"></script>
+
+<script src="/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+
+<script src="/plugins/moment/moment.min.js"></script>
+<script src="/plugins/inputmask/jquery.inputmask.min.js"></script>
+
+<script src="/plugins/daterangepicker/daterangepicker.js"></script>
+
+<script src="/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+
+<script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<script src="/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+
+<script src="/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+
+<script src="/plugins/dropzone/min/dropzone.min.js"></script>
+
+<script src="/dist/js/adminlte.min.js?v=3.2.0"></script>
+
+<script src="/dist/js/demo.js"></script>
+
+
+<script>
+    function printDiv(divName)
+    {
+         var printContents = document.getElementById(divName).innerHTML;
+         var originalContents = document.body.innerHTML;
+
+         document.body.innerHTML = printContents;
+
+         window.print();
+
+         document.body.innerHTML = originalContents;
+    }
+    function optionChange()
+    {
+
+         var e = document.getElementById("selected");
+         if(e.value == 'btdate')
+         {
+            update("display:block", "display:none", "display:none");
+         }
+         else if(e.value == 'date')
+         {
+             update("display:none", "display:block", "display:none");
+         }
+         else if(e.value == 'type')
+         {
+             update("display:none", "display:none", "display:block");
+         }
+         else if(e.value == 'all'){
+             update("display:none", "display:none", "display:none");
+         }
+
+    }
+    function update(_range, _date, _type){
+        document.getElementById("date_range").style = _range;
+        document.getElementById("specific_date").style = _date;
+        document.getElementById("visits_types").style = _type;
+    }
+
+</script>
