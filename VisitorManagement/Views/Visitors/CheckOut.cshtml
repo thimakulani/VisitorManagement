@@ -7,32 +7,37 @@
 <div class="container">
     <center>
         <div class="login-box">
-          <div class="card">
-              <div class="card-header">
-                  <p class="login-box-msg">Sign out to enter the building</p>
-              </div>
-            <div class="card-body login-card-body">
-              
-              <form method="post" asp-action="CheckOut">
-                  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="input-group mb-3">
-                  <input type="text"asp-for="Id" class="form-control" placeholder="IDENTIFICATION">
-                  <div class="input-group-append">
-                    <div class="input-group-text">
-                      <span class="fas fa-person"></span>
-                    </div>
-                  </div>
+            <div class="card">
+                <div class="card-header">
+                    <p class="login-box-msg">Sign out to enter the building</p>
                 </div>
-                <div class="card" >
-                    <p class="card-body" style="text-align: justify;">Thank you for visiting DTCS
+                <div class="card-body login-card-body">
+
+                    <form method="post" asp-action="CheckOut">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="input-group mb-3">
+                            <input type="text" asp-for="Id" class="form-control" placeholder="IDENTIFICATION">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-person"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <p class="card-body" style="text-align: justify;">Thank you for visiting DTCS
+                        </div>
+                        <div class="social-auth-links text-center mb-3">
+                            <input type="submit" value="CHECK-OUT" class="form-control btn btn-primary" />
+                        </div>
+                    </form>
                 </div>
-                <div class="social-auth-links text-center mb-3">
-                    <input type="submit" value="CHECK-OUT" class="form-control btn btn-primary" />
-                </div>
-              </form>
+                <!-- /.login-card-body -->
             </div>
-            <!-- /.login-card-body -->
-          </div>
         </div>
     </center>
 </div>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_Notification");
+}
+}

@@ -8,7 +8,9 @@ namespace VisitorManagement.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), DisplayName("Id#")]
         public int Id { get; set; }
-        public string? Persal { get; set; }
+        [ForeignKey("Employee")]
+        public int Persal { get; set; }
+        public Employee? Employee { get; set; }
         public string? Temp { get; set; }
         public DateTime Last_login { get; set; }
         public DateTime Last_logout { get; set; }

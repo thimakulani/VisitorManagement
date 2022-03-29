@@ -1,4 +1,4 @@
-﻿@model VisitorManagement.Models.Employee
+﻿@model VisitorManagement.Models.EmployeeRegister
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -152,13 +152,13 @@
     <div class="center-screen">
         <div class="container">
             <div class="card card-container">
-                <form class="form-signin" method="post" action="">
+                <form class="form-signin" method="post" asp-action="CheckIn">
                     <h2 class="text-success">
                         <b>EMPLOYEE CHECK-IN</b>
                     </h2>
-                    <input type="text" name="persal" class="form-control" placeholder="Persal Number" required autofocus>
-                    <input type="text" name="temp" class="form-control" placeholder="Temperature" required>
-                    <select class="form-control" name="asset_type">
+                    <input type="text" name="persal" asp-for="Persal" class="form-control" placeholder="Persal Number" required autofocus>
+                    <input type="number" name="temp" class="form-control" asp-for="Temp" placeholder="Temperature" required>
+                    <select class="form-control" name="asset_type" asp-for="Asset_type">
                         <option class="hidden" selected disabled>
                             -- Device Type ? --
                         </option>
@@ -167,10 +167,9 @@
                         <option value="Cellphone">Cellphone</option>
                         <option value="Other">Other</option>
                     </select>
-                    <input type="text" style="margin-top:7px" name="other_asset_type" class="form-control" placeholder="If other, Please specify."
-                           value="">
 
-                    <input type="text" style="margin-top:7px" name="asset_num" class="form-control" placeholder="Asset/Serial Number" value="">
+                    <input type="text" asp-for="Asset_num" style="margin-top:7px" name="asset_num" class="form-control" 
+                    placeholder="Asset/Serial Number" />
 
                     <div class="card">
                         <p class="card-text" style="text-align: justify;">Good morning, thank you for your contibution today at LDTCS.</p>

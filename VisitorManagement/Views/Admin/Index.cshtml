@@ -18,13 +18,13 @@
                         @Html.DisplayNameFor(model => model.Lastname)
                     </th>
                      <th>
-                        @Html.DisplayNameFor(model => model.PhoneNumber)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Email)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.DateCreated)
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </th>
+                    <th>
+                        DATE CREATED
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Level)
@@ -37,13 +37,13 @@
                 {
                     <tr>
                          <td>
+                            @Html.DisplayFor(modelItem => item.Persal)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.Firstname)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Lastname)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Persal)
                         </td>
                        
                         <td>

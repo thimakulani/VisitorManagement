@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VisitorManagement.Models.VisittorRegister>
+﻿@model IEnumerable<VisitorManagement.Service.ReportViewModel>
 
 <div class="card">
     <div class="card-header">
@@ -82,7 +82,7 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Id)
+                            @Html.DisplayNameFor(model => model.VisittorRegister.Id)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Visitor.Name)
@@ -91,19 +91,19 @@
                             @Html.DisplayNameFor(model => model.Visitor.Id)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Last_login)
+                            @Html.DisplayNameFor(model => model.VisittorRegister.Last_login)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Last_logout_date)
+                            @Html.DisplayNameFor(model => model.VisittorRegister.Last_logout)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Type)
+                            @Html.DisplayNameFor(model => model.VisittorRegister.Type)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Temperature)
+                            @Html.DisplayNameFor(model => model.VisittorRegister.Temperature)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.AppointmentWith)
+                            @Html.DisplayNameFor(model => model.VisittorRegister.AppointmentWith)
                         </th>
 
                         @* <th></th>*@
@@ -114,7 +114,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Id)
+                                @Html.DisplayFor(modelItem => item.VisittorRegister.Id)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Visitor.Name)
@@ -123,19 +123,19 @@
                                 @Html.DisplayFor(modelItem => item.Visitor.Id)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Last_login)
+                                @Html.DisplayFor(modelItem => item.VisittorRegister.Last_login)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Last_logout)
+                                @Html.DisplayFor(modelItem => item.VisittorRegister.Last_logout)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Type)
+                                @Html.DisplayFor(modelItem => item.VisittorRegister.Type)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Temperature)
+                                @Html.DisplayFor(modelItem => item.VisittorRegister.Temperature)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.AppointmentWith)
+                                @Html.DisplayFor(modelItem => item.VisittorRegister.AppointmentWith)
                             </td>
                             @*
                                 <td>

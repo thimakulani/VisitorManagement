@@ -1,0 +1,165 @@
+﻿@model VisitorManagement.Service.EmployeeProfileViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Profile Image -->
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="text-center">
+                            <img class="profile-user-img img-fluid img-circle"
+                                 src="../../dist/img/user4-128x128.jpg"
+                                 alt="User profile picture">
+                        </div>
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <b>@Html.DisplayNameFor(m =>m.Employee.LastName)</b> <a class="float-right">@Html.DisplayFor(m =>m.Employee.FirstName)</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>@Html.DisplayNameFor(m =>m.Employee.LastName)</b> <a class="float-right">@Html.DisplayFor(m =>m.Employee.LastName)</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>@Html.DisplayNameFor(m =>m.Employee.Email)</b> <a class="float-right">@Html.DisplayFor(m =>m.Employee.Email)</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>@Html.DisplayNameFor(m =>m.Employee.Phone)</b> <a class="float-right">@Html.DisplayFor(m =>m.Employee.Phone)</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+
+            </div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header p-2">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item"><a class="nav-link active" href="#PROFILE" data-toggle="tab">PROFILE</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#HISTORY" data-toggle="tab">CHECK-IN HISTORY</a></li>
+                        </ul>
+                    </div><!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="PROFILE">
+                                <!-- Post -->
+                                <form class="form-horizontal" method="post" asp-action="Details">
+                                    <div class="form-group row">
+                                        <label asp-for="Employee.FirstName" class="col-sm-2 col-form-label"></label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" asp-for="Employee.FirstName" placeholder="First Name"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="Employee.LastName" class="col-sm-2 col-form-label"></label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" asp-for="Employee.LastName" placeholder="Last Name"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="Employee.Email" class="col-sm-2 col-form-label">Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" asp-for="Employee.Email" placeholder="Email"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="Employee.Phone" class="col-sm-2 col-form-label"></label>
+                                        <div class="col-sm-10">
+                                            <input class="form-control" asp-for="Employee.Phone" placeholder="Phone#"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="Employee.Status" class="col-sm-2 col-form-label"></label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" disabled asp-for="Employee.Status" placeholder="Status"/>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="form-group row">
+                                        <div class="offset-sm-2 col-sm-10">
+                                            <input type="submit"  class="btn-sm btn-danger"/>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- /.post -->
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="HISTORY">
+                                <!-- The timeline -->
+                                <div>
+                                    <div class="table-responsive">
+
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        PERSAL
+                                                    </th>
+                                                    <th>
+                                                        TEMPERATURE
+                                                    </th>
+                                                    <th>
+                                                        CHECK-IN
+                                                    </th>
+                                                    <th>
+                                                        CHECK-OUT
+                                                    </th>
+                                                    <th>
+                                                        ASSET#
+                                                    </th>
+                                                    <th>
+                                                        ASSET TYPE
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.EmployeeRegister)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Persal)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Temp)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Last_login)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Last_logout)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Asset_num)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Asset_type)
+                                                        </td>
+                                                       
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
+                            <!-- /.tab-pane -->
+                        </div>
+                        <!-- /.tab-content -->
+                    </div><!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>

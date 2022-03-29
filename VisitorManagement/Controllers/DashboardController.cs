@@ -20,9 +20,12 @@ namespace VisitorManagement.Controllers
 
         public IActionResult Index()
         {
-            DashboardStats model = new DashboardStats();
-            model.VisitorCounter = context.Visitor.ToList().Count;
-            model.EmployeeCounter = context.Employees.ToList().Count;
+            DashboardViewModel model = new();
+            model.EmployeeCheckIn = context.EmployeeRegister.Where(x => x.Last_login.Date == DateTime.Now.Date).Count();
+            model.EmployeeCheckout = context.EmployeeRegister.Where(x => x.Last_logout.Date == DateTime.Now.Date).Count();
+
+            model.VisitorCheckIn = context.VisittorRegister.Where(x => x.Last_login.Value.Date == DateTime.Now.Date).Count();
+            model.VisitorCheckOut = context.VisittorRegister.Where(x => x.Last_logout.Value.Date == DateTime.Now.Date).Count();
             return View(model);
         }
         [HttpPost]

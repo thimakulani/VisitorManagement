@@ -1,7 +1,7 @@
 ﻿@using VisitorManagement.Service;
-@model DashboardStats;
+@model DashboardViewModel;
 @{
-    
+
 }
 <div class="card">
     <div class="card-header">
@@ -21,7 +21,7 @@
                             <div class="progress-bar" style="width: 100%"></div>
                         </div>
                         <span class="progress-description">
-                            @Model.CheckInCounter
+                            @Model.VisitorCheckIn
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -41,7 +41,7 @@
                             <div class="progress-bar" style="width: 100%"></div>
                         </div>
                         <span class="progress-description">
-                            @Model.CheckInCounter
+                            @Model.VisitorCheckOut
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -61,7 +61,7 @@
                             <div class="progress-bar" style="width: 100%"></div>
                         </div>
                         <span class="progress-description">
-                            @Model.CheckInCounter
+                            @Model.EmployeeCheckIn
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -81,7 +81,7 @@
                             <div class="progress-bar" style="width: 100%"></div>
                         </div>
                         <span class="progress-description">
-                            @Model.CheckInCounter
+                            @Model.EmployeeCheckout
                         </span>
                     </div>
                     <!-- /.info-box-content -->

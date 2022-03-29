@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VisitorManagement.Data;
 
@@ -11,9 +12,10 @@ using VisitorManagement.Data;
 namespace VisitorManagement.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220328010939_mod_db")]
+    partial class mod_db
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,10 +246,22 @@ namespace VisitorManagement.Migrations
                     b.Property<int>("Persal")
                         .HasColumnType("int");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DirectorateName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Job_title")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
@@ -299,8 +313,8 @@ namespace VisitorManagement.Migrations
                     b.Property<DateTime>("Last_logout_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Persal")
-                        .HasColumnType("int");
+                    b.Property<string>("Persal")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Suspend_status")
                         .HasColumnType("bit");
@@ -311,8 +325,6 @@ namespace VisitorManagement.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("HealthCheckId");
-
-                    b.HasIndex("Persal");
 
                     b.ToTable("EmployeeRegister");
                 });
@@ -364,8 +376,8 @@ namespace VisitorManagement.Migrations
                     b.Property<string>("Hc_visit_health_facility")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Last_check_dates")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Last_check_dates")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Persal")
                         .HasColumnType("int");
@@ -570,14 +582,6 @@ namespace VisitorManagement.Migrations
                         .HasForeignKey("HealthCheckId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("VisitorManagement.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("Persal")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
 
                     b.Navigation("HealthCheck");
                 });
