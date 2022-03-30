@@ -10,12 +10,12 @@ namespace VisitorManagement.Data
         {
 
         }
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Employee> Employee { get; set; }
         public DbSet<HealthCheck> HealthCheck { get; set; }
         public DbSet<Temperature> Temperature { get; set; }
         public DbSet<Visitor> Visitor { get; set; }
         public DbSet<EmployeeRegister> EmployeeRegister { get; set; }
-        public DbSet<VisittorRegister> VisittorRegister { get; set; }
+        public DbSet<VisitorRegister> VisittorRegister { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

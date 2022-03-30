@@ -23,8 +23,8 @@ namespace VisitorManagement.Models
         public string? Hc_health_facility_name { get; set; }
         public string? Hc_health_facility_dates { get; set; }
         public DateTime? Last_check_dates { get; set; }
-        [ForeignKey("Employee")]
-        public int Persal { get; set; }
+
+        public int? EmployeeId { get; set; }
         public Employee? Employee { get; set; }
     }
 }

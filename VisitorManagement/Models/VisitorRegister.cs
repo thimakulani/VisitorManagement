@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VisitorManagement.Models
 {
-    public class VisittorRegister
+    public class VisitorRegister
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), DisplayName("Id#")]
         public int Id { get; set; }
@@ -35,8 +35,8 @@ namespace VisitorManagement.Models
         public DateTime? Hc_health_facility_dates { get; set; }
 
         [Required]
-        public string VisitorId { get; set; }
+        public string? VisitorId { get; set; }
         [Required]
-        public Visitor Visitor { get; set; }
+        public Visitor? Visitor { get; set; }
     }
 }

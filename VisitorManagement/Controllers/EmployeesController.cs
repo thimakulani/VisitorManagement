@@ -13,31 +13,33 @@ namespace VisitorManagement.Controllers
         {
             this.context = context;
         }
-
         public IActionResult Index()
         {
-            var employees = context.Employees.ToList();
+            var employees = context.Employee.ToList();
             return View(employees);
         }
         public IActionResult Details(int persal)
         {
-            var reg = context.EmployeeRegister.Where(x => x.Persal == persal).ToList();
-            var emp = context.Employees.Find(persal);
+            var reg = context.EmployeeRegister.Where(x => x.EmployeeId == persal).ToList();
+            var emp = context.Employee.Find(persal);
 
             EmployeeProfileViewModel employeeProfileViewModel = new EmployeeProfileViewModel()
             {
                 Employee = emp,
                 EmployeeRegister = reg
             };
-
-
             return View(employeeProfileViewModel);
         }
         [HttpPost]
         public IActionResult Details(EmployeeProfileViewModel viewModel)
         {
+            var reg = context.EmployeeRegister.Where(x => x.EmployeeId == viewModel.Employee.Persal).ToList();
+            viewModel.EmployeeRegister = reg;
+            context.Employee.Update(viewModel.Employee);
+            context.SaveChanges();
+            Console.WriteLine(viewModel);
 
-            return View();
+            return View(viewModel);
         }
         public IActionResult CheckIn()
         {
@@ -52,16 +54,18 @@ namespace VisitorManagement.Controllers
         {
             if (employee != null)
             {
-                var emp = context.Employees.Find(employee.Persal);
+                var emp = context.Employee.Find(employee.Persal);
                 if (emp == null)
                 {
-                    context.Employees.Add(employee);
+                    employee.Status = "signed out";
+                    context.Employee.Add(employee);
                     context.SaveChanges();
                     TempData["success"] = "Employee profile has been successfully created";
-                    RedirectToAction("Index");
+                    return RedirectToAction("Index");
                 }
                 else
                 {
+                    TempData["error"] = "Percal Number already registred";
                     ModelState.AddModelError("", "Persal already registered");
                 }
             }
@@ -76,15 +80,19 @@ namespace VisitorManagement.Controllers
         {
             if (employee.Persal > 0)
             {
-                var emp = context.Employees.Find(employee.Persal);
+                var emp = context.Employee.FirstOrDefault(x => x.Persal == employee.Persal);
                 if (emp != null)
                 {
-                    var emp_reg = context.HealthCheck.Where(x => x.Persal == employee.Persal && x.Last_check_dates.Value.DayOfWeek > DateTime.Now.DayOfWeek);
+                    var emp_reg = context.HealthCheck.Where(x => x.EmployeeId == employee.Persal && x.Last_check_dates.Value.DayOfWeek > DateTime.Now.DayOfWeek);
+                }
+                else
+                {
+                    TempData["error"] = "Persal not registered";
                 }
             }
             else
             {
-                TempData["error"] = "Persal not registered";
+                TempData["error"] = "Invalid Persal Number";
             }
             return View();
         }

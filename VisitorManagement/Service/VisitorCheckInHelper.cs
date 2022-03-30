@@ -6,6 +6,6 @@ namespace VisitorManagement.Service
     public class VisitorCheckInHelper
     {
         public string Id { get; set; }
-        public VisittorRegister V_REG { get; set; }
+        public VisitorRegister V_REG { get; set; }
     }
 }

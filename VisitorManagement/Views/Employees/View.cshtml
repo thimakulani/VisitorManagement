@@ -7,7 +7,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Persal)
+                @Html.DisplayNameFor(model => model.EmployeeId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Temp)
@@ -27,57 +27,46 @@
             <th>
                 @Html.DisplayNameFor(model => model.Asset_type)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Last_login_date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Last_logout_date)
-            </th>
-            <th>
+            @*    <th>
                 @Html.DisplayNameFor(model => model.HealthCheck)
-            </th>
+                </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Persal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Temp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Last_login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Last_logout)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Suspend_status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Asset_num)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Asset_type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Last_login_date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Last_logout_date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HealthCheck.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Temp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Last_login)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Last_logout)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Suspend_status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Asset_num)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Asset_type)
+                </td>
+                @* <td>
+                    @Html.DisplayFor(modelItem => item.HealthCheck.Id)
+                    </td>*@
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

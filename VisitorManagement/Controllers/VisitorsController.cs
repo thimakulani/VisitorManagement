@@ -124,7 +124,7 @@ namespace VisitorManagement.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult VisitorCheckIn(VisittorRegister data)
+        public IActionResult VisitorCheckIn(VisitorRegister data)
         {
             var ll = DateTime.Now;
             data.Last_login = ll;

@@ -54,37 +54,37 @@
                                     <div class="form-group row">
                                         <label asp-for="Employee.FirstName" class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" asp-for="Employee.FirstName" placeholder="First Name"/>
+                                            <input type="text" class="form-control" asp-for="Employee.FirstName" placeholder="First Name" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label asp-for="Employee.LastName" class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" asp-for="Employee.LastName" placeholder="Last Name"/>
+                                            <input type="text" class="form-control" asp-for="Employee.LastName" placeholder="Last Name" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label asp-for="Employee.Email" class="col-sm-2 col-form-label">Name</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" asp-for="Employee.Email" placeholder="Email"/>
+                                            <input type="text" class="form-control" asp-for="Employee.Email" placeholder="Email" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label asp-for="Employee.Phone" class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-10">
-                                            <input class="form-control" asp-for="Employee.Phone" placeholder="Phone#"/>
+                                            <input class="form-control" asp-for="Employee.Phone" placeholder="Phone#" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label asp-for="Employee.Status" class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" disabled asp-for="Employee.Status" placeholder="Status"/>
+                                            <input type="text" class="form-control" disabled asp-for="Employee.Status" placeholder="Status" />
                                         </div>
                                     </div>
-                                   
+
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">
-                                            <input type="submit"  class="btn-sm btn-danger"/>
+                                            <input type="submit" class="btn-sm btn-danger" />
                                         </div>
                                     </div>
                                 </form>
@@ -122,27 +122,27 @@
                                             <tbody>
                                                 @foreach (var item in Model.EmployeeRegister)
                                                 {
-                                                    <tr>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.Persal)
-                                                        </td>
-                                                        <td>
+                                                            <tr>
+                                                                <td>
+                                                            @Html.DisplayFor(modelItem => item.EmployeeId)
+                                                                </td>
+                                                                <td>
                                                             @Html.DisplayFor(modelItem => item.Temp)
-                                                        </td>
-                                                        <td>
+                                                                </td>
+                                                                <td>
                                                             @Html.DisplayFor(modelItem => item.Last_login)
-                                                        </td>
-                                                        <td>
+                                                                </td>
+                                                                <td>
                                                             @Html.DisplayFor(modelItem => item.Last_logout)
-                                                        </td>
-                                                        <td>
+                                                                </td>
+                                                                <td>
                                                             @Html.DisplayFor(modelItem => item.Asset_num)
-                                                        </td>
-                                                        <td>
+                                                                </td>
+                                                                <td>
                                                             @Html.DisplayFor(modelItem => item.Asset_type)
-                                                        </td>
-                                                       
-                                                    </tr>
+                                                                </td>
+
+                                                            </tr>
                                                 }
                                             </tbody>
                                         </table>

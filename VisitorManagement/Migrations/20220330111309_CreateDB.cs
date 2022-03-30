@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VisitorManagement.Migrations
 {
-    public partial class CreatDB : Migration
+    public partial class CreateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,7 +54,7 @@ namespace VisitorManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employees",
+                name: "Employee",
                 columns: table => new
                 {
                     Persal = table.Column<int>(type: "int", nullable: false),
@@ -62,17 +62,13 @@ namespace VisitorManagement.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Job_title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DirectorateName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Staff_status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Qr_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employees", x => x.Persal);
+                    table.PrimaryKey("PK_Employee", x => x.Persal);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,7 +90,6 @@ namespace VisitorManagement.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Temperature = table.Column<double>(type: "float", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Company = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -215,6 +210,33 @@ namespace VisitorManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EmployeeRegister",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Temp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Last_login = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Last_logout = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Suspend_status = table.Column<bool>(type: "bit", nullable: false),
+                    Asset_num = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Asset_type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Last_login_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Last_logout_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EmployeeId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployeeRegister", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EmployeeRegister_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employee",
+                        principalColumn: "Persal",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "HealthCheck",
                 columns: table => new
                 {
@@ -234,18 +256,17 @@ namespace VisitorManagement.Migrations
                     Hc_visit_health_facility = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Hc_health_facility_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Hc_health_facility_dates = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Last_check_dates = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Persal = table.Column<int>(type: "int", nullable: false)
+                    Last_check_dates = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EmployeeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_HealthCheck", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_HealthCheck_Employees_Persal",
-                        column: x => x.Persal,
-                        principalTable: "Employees",
-                        principalColumn: "Persal",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_HealthCheck_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employee",
+                        principalColumn: "Persal");
                 });
 
             migrationBuilder.CreateTable(
@@ -254,11 +275,11 @@ namespace VisitorManagement.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Last_login = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Last_logout = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Last_login_date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Last_logout_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Last_login = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Last_logout = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AppointmentWith = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Temperature = table.Column<double>(type: "float", nullable: true),
                     Suspend_status = table.Column<bool>(type: "bit", nullable: false),
                     Asset_type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Asset_num = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -271,11 +292,11 @@ namespace VisitorManagement.Migrations
                     Hc_other = table.Column<bool>(type: "bit", nullable: false),
                     Hc_visit_gethering = table.Column<bool>(type: "bit", nullable: false),
                     Hc_gethering_place = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Hc_gething_dates = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Hc_gething_dates = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Hc_visit_health_facility = table.Column<bool>(type: "bit", nullable: false),
                     Hc_health_facility_name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Hc_health_facility_dates = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    VisitorId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Hc_health_facility_dates = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    VisitorId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -284,33 +305,6 @@ namespace VisitorManagement.Migrations
                         name: "FK_VisittorRegister_Visitor_VisitorId",
                         column: x => x.VisitorId,
                         principalTable: "Visitor",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "EmployeeRegister",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Persal = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Temp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Last_login = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Last_logout = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Suspend_status = table.Column<bool>(type: "bit", nullable: false),
-                    Asset_num = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Asset_type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Last_login_date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Last_logout_date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    HealthCheckId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EmployeeRegister", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_EmployeeRegister_HealthCheck_HealthCheckId",
-                        column: x => x.HealthCheckId,
-                        principalTable: "HealthCheck",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -355,14 +349,14 @@ namespace VisitorManagement.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeRegister_HealthCheckId",
+                name: "IX_EmployeeRegister_EmployeeId",
                 table: "EmployeeRegister",
-                column: "HealthCheckId");
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HealthCheck_Persal",
+                name: "IX_HealthCheck_EmployeeId",
                 table: "HealthCheck",
-                column: "Persal");
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VisittorRegister_VisitorId",
@@ -391,6 +385,9 @@ namespace VisitorManagement.Migrations
                 name: "EmployeeRegister");
 
             migrationBuilder.DropTable(
+                name: "HealthCheck");
+
+            migrationBuilder.DropTable(
                 name: "Temperature");
 
             migrationBuilder.DropTable(
@@ -403,13 +400,10 @@ namespace VisitorManagement.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "HealthCheck");
+                name: "Employee");
 
             migrationBuilder.DropTable(
                 name: "Visitor");
-
-            migrationBuilder.DropTable(
-                name: "Employees");
         }
     }
 }

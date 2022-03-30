@@ -267,7 +267,7 @@ namespace VisitorManagement.Migrations
 
                     b.HasKey("Persal");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("VisitorManagement.Models.EmployeeRegister", b =>
@@ -284,7 +284,7 @@ namespace VisitorManagement.Migrations
                     b.Property<string>("Asset_type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("HealthCheckId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Last_login")
@@ -299,9 +299,6 @@ namespace VisitorManagement.Migrations
                     b.Property<DateTime>("Last_logout_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Persal")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Suspend_status")
                         .HasColumnType("bit");
 
@@ -310,9 +307,7 @@ namespace VisitorManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HealthCheckId");
-
-                    b.HasIndex("Persal");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("EmployeeRegister");
                 });
@@ -324,6 +319,9 @@ namespace VisitorManagement.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Hc_cough")
                         .HasColumnType("nvarchar(max)");
@@ -367,15 +365,12 @@ namespace VisitorManagement.Migrations
                     b.Property<DateTime?>("Last_check_dates")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Persal")
-                        .HasColumnType("int");
-
                     b.Property<double?>("Temperature")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Persal");
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("HealthCheck");
                 });
@@ -430,7 +425,7 @@ namespace VisitorManagement.Migrations
                     b.ToTable("Visitor");
                 });
 
-            modelBuilder.Entity("VisitorManagement.Models.VisittorRegister", b =>
+            modelBuilder.Entity("VisitorManagement.Models.VisitorRegister", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -565,35 +560,25 @@ namespace VisitorManagement.Migrations
 
             modelBuilder.Entity("VisitorManagement.Models.EmployeeRegister", b =>
                 {
-                    b.HasOne("VisitorManagement.Models.HealthCheck", "HealthCheck")
-                        .WithMany()
-                        .HasForeignKey("HealthCheckId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("VisitorManagement.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("Persal")
+                        .WithMany("EmployeeRegisters")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Employee");
-
-                    b.Navigation("HealthCheck");
                 });
 
             modelBuilder.Entity("VisitorManagement.Models.HealthCheck", b =>
                 {
                     b.HasOne("VisitorManagement.Models.Employee", "Employee")
                         .WithMany()
-                        .HasForeignKey("Persal")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeId");
 
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("VisitorManagement.Models.VisittorRegister", b =>
+            modelBuilder.Entity("VisitorManagement.Models.VisitorRegister", b =>
                 {
                     b.HasOne("VisitorManagement.Models.Visitor", "Visitor")
                         .WithMany()
@@ -602,6 +587,11 @@ namespace VisitorManagement.Migrations
                         .IsRequired();
 
                     b.Navigation("Visitor");
+                });
+
+            modelBuilder.Entity("VisitorManagement.Models.Employee", b =>
+                {
+                    b.Navigation("EmployeeRegisters");
                 });
 #pragma warning restore 612, 618
         }

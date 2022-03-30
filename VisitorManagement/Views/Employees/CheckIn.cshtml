@@ -43,8 +43,8 @@
     }
 
     /*
-                                                                                                                                             * Card component
-                                                                                                                                             */
+                                                                                                                                                                                                         * Card component
+                                                                                                                                                                                                         */
     .card {
         background-color: #F7F7F7;
         /* just in case there no content*/
@@ -70,8 +70,8 @@
     }
 
     /*
-                                                                                                                                             * Form styles
-                                                                                                                                             */
+                                                                                                                                                                                                         * Form styles
+                                                                                                                                                                                                         */
     .profile-name-card {
         font-size: 16px;
         font-weight: bold;
@@ -156,7 +156,7 @@
                     <h2 class="text-success">
                         <b>EMPLOYEE CHECK-IN</b>
                     </h2>
-                    <input type="text" name="persal" asp-for="Persal" class="form-control" placeholder="Persal Number" required autofocus>
+                    <input type="text" name="persal" asp-for="EmployeeId" class="form-control" placeholder="Persal Number" required autofocus>
                     <input type="number" name="temp" class="form-control" asp-for="Temp" placeholder="Temperature" required>
                     <select class="form-control" name="asset_type" asp-for="Asset_type">
                         <option class="hidden" selected disabled>
@@ -168,8 +168,8 @@
                         <option value="Other">Other</option>
                     </select>
 
-                    <input type="text" asp-for="Asset_num" style="margin-top:7px" name="asset_num" class="form-control" 
-                    placeholder="Asset/Serial Number" />
+                    <input type="text" asp-for="Asset_num" style="margin-top:7px" name="asset_num" class="form-control"
+                           placeholder="Asset/Serial Number" />
 
                     <div class="card">
                         <p class="card-text" style="text-align: justify;">Good morning, thank you for your contibution today at LDTCS.</p>
@@ -180,3 +180,8 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_Notification");
+}
+}

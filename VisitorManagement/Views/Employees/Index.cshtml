@@ -58,9 +58,7 @@
                             @Html.DisplayFor(modelItem => item.Status)
                         </td>
                         <td>
-                            <a class="btn-sm btn-info" asp-action="Edit" asp-route-id="@item.Persal">Edit</a> |
-                            <a class="btn-sm btn-info" asp-action="Details" asp-route-id="@item.Persal">Details</a> |
-                            <a class="btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Persal">Delete</a>
+                            <a class="btn-sm btn-info" asp-action="Details" asp-route-persal="@item.Persal">Details</a>
                         </td>
                     </tr>
                 }

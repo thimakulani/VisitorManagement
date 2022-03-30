@@ -8,13 +8,13 @@ namespace VisitorManagement.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.None), DisplayName("Persal#")]
         public int Persal { get; set; }
-        [DisplayName("Firs tName")]
+        [DisplayName("First Name")]
         public string? FirstName { get; set; }
         [DisplayName("Last Name")]
         public string? LastName { get; set; }
-        [DisplayName("Email")]
+        [DisplayName("Email"), EmailAddress]
         public string? Email { get; set; }
-        [DisplayName("Phone#")]
+        [DisplayName("Phone#"), DataType(DataType.PhoneNumber)]
         public string? Phone { get; set; }
         //[DisplayName("Job Title")]
         //public string? Job_title { get; set; }
@@ -30,5 +30,6 @@ namespace VisitorManagement.Models
         public string? Qr_image { get; set; }
         [DisplayName("Status")]
         public string? Status { get; set; }
+        public ICollection<EmployeeRegister>? EmployeeRegisters { get; set; }
     }
 }
