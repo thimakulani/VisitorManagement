@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VisitorManagement.Migrations
 {
-    public partial class CreateDB : Migration
+    public partial class ADD_DB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,6 +54,29 @@ namespace VisitorManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Delivery",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Identification = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Temp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Company = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Vnumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Item = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Qty = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Whom = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date_created = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Delivery", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Employee",
                 columns: table => new
                 {
@@ -64,7 +87,8 @@ namespace VisitorManagement.Migrations
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Staff_status = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Qr_image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastCheckIn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -101,6 +125,19 @@ namespace VisitorManagement.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Visitor", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VisitReason",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VisitReason", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -216,13 +253,11 @@ namespace VisitorManagement.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Temp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Last_login = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Last_logout = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Last_login = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Last_logout = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Suspend_status = table.Column<bool>(type: "bit", nullable: false),
                     Asset_num = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Asset_type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Last_login_date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Last_logout_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EmployeeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -279,7 +314,7 @@ namespace VisitorManagement.Migrations
                     Last_logout = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AppointmentWith = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Temperature = table.Column<double>(type: "float", nullable: true),
+                    Temperature = table.Column<double>(type: "float", nullable: false),
                     Suspend_status = table.Column<bool>(type: "bit", nullable: false),
                     Asset_type = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Asset_num = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -382,6 +417,9 @@ namespace VisitorManagement.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Delivery");
+
+            migrationBuilder.DropTable(
                 name: "EmployeeRegister");
 
             migrationBuilder.DropTable(
@@ -389,6 +427,9 @@ namespace VisitorManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "Temperature");
+
+            migrationBuilder.DropTable(
+                name: "VisitReason");
 
             migrationBuilder.DropTable(
                 name: "VisittorRegister");

@@ -11,15 +11,15 @@ namespace VisitorManagement.Models
         public int Persal { get; set; }
 
         [Required]
-        public string? Firstname { get; set; }
+        public string Firstname { get; set; }
 
         [Required]
-        public string? Lastname { get; set; }
+        public string Lastname { get; set; }
 
         [Required]
         public DateTime? DateCreated { get; set; } = DateTime.Now;
 
         [Required]
-        public string? Level { get; set; }
+        public string Level { get; set; }
     }
 }

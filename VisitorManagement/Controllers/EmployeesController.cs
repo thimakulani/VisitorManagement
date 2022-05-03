@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using VisitorManagement.Data;
 using VisitorManagement.Models;
 using VisitorManagement.Service;
+using System.Linq;
 
 namespace VisitorManagement.Controllers
 {
@@ -22,7 +24,7 @@ namespace VisitorManagement.Controllers
         {
             var reg = context.EmployeeRegister.Where(x => x.EmployeeId == persal).ToList();
             var emp = context.Employee.Find(persal);
-
+            emp.Persal = persal;
             EmployeeProfileViewModel employeeProfileViewModel = new EmployeeProfileViewModel()
             {
                 Employee = emp,
@@ -34,10 +36,13 @@ namespace VisitorManagement.Controllers
         public IActionResult Details(EmployeeProfileViewModel viewModel)
         {
             var reg = context.EmployeeRegister.Where(x => x.EmployeeId == viewModel.Employee.Persal).ToList();
-            viewModel.EmployeeRegister = reg;
-            context.Employee.Update(viewModel.Employee);
+
+            var emp = viewModel.Employee;
+            context.Entry(emp).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
             context.SaveChanges();
-            Console.WriteLine(viewModel);
+            viewModel.EmployeeRegister = reg;
+            TempData["success"] = "Successfully updated";
 
             return View(viewModel);
         }
@@ -76,14 +81,81 @@ namespace VisitorManagement.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult CheckIn(Employee employee)
+        public IActionResult EmployeeChecksIn(EmployeeRegister viewModel)
         {
-            if (employee.Persal > 0)
+            HttpContext.Session.SetInt32("Persal", viewModel.EmployeeId);
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CheckIn(EmployeeRegister viewModel)
+        {
+            if (viewModel.EmployeeId > 0)
             {
-                var emp = context.Employee.FirstOrDefault(x => x.Persal == employee.Persal);
+                var emp = context.Employee.Find(viewModel.EmployeeId);
+
                 if (emp != null)
                 {
-                    var emp_reg = context.HealthCheck.Where(x => x.EmployeeId == employee.Persal && x.Last_check_dates.Value.DayOfWeek > DateTime.Now.DayOfWeek);
+                    if (emp.Status == "signed out")//signed out
+                    {
+                        //if signed out
+                        //check last signed in dates
+                        if (emp.LastCheckIn.HasValue)
+                        {
+                            if ((DateTime.Now - emp.LastCheckIn.Value).TotalDays >= 7)
+                            {
+                                //create id session
+                                //create temperature session
+                                //asset name  session
+                                //create asset number session
+                                ViewBag.e_name = $"{emp.FirstName} {emp.LastName}";
+                                return RedirectToAction("EmployeeChecksIn", viewModel);//with healthcheck
+                            }
+                            else
+                            {
+                                var d_t = DateTime.Now;
+                                var EMP_REG = context.EmployeeRegister.Where(x => x.EmployeeId == viewModel.EmployeeId && x.Last_login.Value.Date == emp.LastCheckIn.Value.Date);
+                                emp.Status = "signed in";
+                                emp.LastCheckIn = d_t;
+
+                                //FIND LAST CHECKED IN FROM REGISTER
+
+                                viewModel.Last_login = d_t;
+
+
+                                context.Employee.Update(emp);
+                                context.EmployeeRegister.Add(viewModel);
+                                context.SaveChanges();
+                                TempData["success"] = "Employee successfully checked in";
+                                return RedirectToAction("CheckIn");
+                            }
+                        }
+                        else
+                        {
+                            ViewBag.e_name = $"{emp.FirstName} {emp.LastName}";
+                            return RedirectToAction("EmployeeChecksIn", viewModel);
+                        }
+
+
+                    }
+                    else
+                    {
+                        TempData["error"] = "Employee is currently signed in from last session";
+                        if (emp.LastCheckIn.HasValue)
+                        {
+                            ModelState.AddModelError("", $"Employee is currently signed it, from {emp.LastCheckIn.Value:dddd, dd/MM/yyyy}");
+                        }
+                    }
+
+
+                    //var emp_reg = context.EmployeeRegister.First(x => (x.Last_login.Value - DateTimeOffset.Now).TotalDays <= 7);
+                    //if (emp_reg == null)
+                    //{
+                    //    return RedirectToAction("EmployeeChecKsIn", viewModel);
+                    //}
+                    //else
+                    //{
+
+                    //}
                 }
                 else
                 {
@@ -94,6 +166,11 @@ namespace VisitorManagement.Controllers
             {
                 TempData["error"] = "Invalid Persal Number";
             }
+            return View(viewModel);
+        }
+      
+        public IActionResult CheckOut()
+        {
             return View();
         }
     }

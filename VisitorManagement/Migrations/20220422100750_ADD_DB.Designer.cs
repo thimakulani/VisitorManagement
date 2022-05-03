@@ -12,14 +12,14 @@ using VisitorManagement.Data;
 namespace VisitorManagement.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20220330111309_CreateDB")]
-    partial class CreateDB
+    [Migration("20220422100750_ADD_DB")]
+    partial class ADD_DB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -241,6 +241,52 @@ namespace VisitorManagement.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("VisitorManagement.Models.Delivery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Company")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date_created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Identification")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Item")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Qty")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Temp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Vnumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Whom")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Delivery");
+                });
+
             modelBuilder.Entity("VisitorManagement.Models.Employee", b =>
                 {
                     b.Property<int>("Persal")
@@ -251,6 +297,9 @@ namespace VisitorManagement.Migrations
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastCheckIn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
@@ -289,16 +338,10 @@ namespace VisitorManagement.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Last_login")
+                    b.Property<DateTime?>("Last_login")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Last_login_date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Last_logout")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("Last_logout_date")
+                    b.Property<DateTime?>("Last_logout")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Suspend_status")
@@ -492,7 +535,7 @@ namespace VisitorManagement.Migrations
                     b.Property<bool>("Suspend_status")
                         .HasColumnType("bit");
 
-                    b.Property<double?>("Temperature")
+                    b.Property<double>("Temperature")
                         .HasColumnType("float");
 
                     b.Property<string>("Type")
@@ -507,6 +550,23 @@ namespace VisitorManagement.Migrations
                     b.HasIndex("VisitorId");
 
                     b.ToTable("VisittorRegister");
+                });
+
+            modelBuilder.Entity("VisitorManagement.Models.VisitReason", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VisitReason");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

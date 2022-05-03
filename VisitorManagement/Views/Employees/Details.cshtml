@@ -18,7 +18,7 @@
                         </div>
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
-                                <b>@Html.DisplayNameFor(m =>m.Employee.LastName)</b> <a class="float-right">@Html.DisplayFor(m =>m.Employee.FirstName)</a>
+                                <b>@Html.DisplayNameFor(m =>m.Employee.FirstName)</b> <a class="float-right">@Html.DisplayFor(m =>m.Employee.FirstName)</a>
                             </li>
                             <li class="list-group-item">
                                 <b>@Html.DisplayNameFor(m =>m.Employee.LastName)</b> <a class="float-right">@Html.DisplayFor(m =>m.Employee.LastName)</a>
@@ -28,6 +28,12 @@
                             </li>
                             <li class="list-group-item">
                                 <b>@Html.DisplayNameFor(m =>m.Employee.Phone)</b> <a class="float-right">@Html.DisplayFor(m =>m.Employee.Phone)</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>@Html.DisplayNameFor(m =>m.Employee.Persal)</b> <a class="float-right">@Html.DisplayFor(m =>m.Employee.Persal)</a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>@Html.DisplayNameFor(m =>m.Employee.Status)</b> <a class="float-right">@Html.DisplayFor(m =>m.Employee.Status)</a>
                             </li>
                         </ul>
 
@@ -64,7 +70,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label asp-for="Employee.Email" class="col-sm-2 col-form-label">Name</label>
+                                        <label asp-for="Employee.Email" class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" asp-for="Employee.Email" placeholder="Email" />
                                         </div>
@@ -79,6 +85,12 @@
                                         <label asp-for="Employee.Status" class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" disabled asp-for="Employee.Status" placeholder="Status" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label asp-for="Employee.Persal" class="col-sm-2 col-form-label"></label>
+                                        <div class="col-sm-10">
+                                            <input type="number" class="form-control" asp-for="Employee.Persal" placeholder="Persal" />
                                         </div>
                                     </div>
 
@@ -122,27 +134,27 @@
                                             <tbody>
                                                 @foreach (var item in Model.EmployeeRegister)
                                                 {
-                                                            <tr>
-                                                                <td>
+                                                    <tr>
+                                                        <td>
                                                             @Html.DisplayFor(modelItem => item.EmployeeId)
-                                                                </td>
-                                                                <td>
+                                                        </td>
+                                                        <td>
                                                             @Html.DisplayFor(modelItem => item.Temp)
-                                                                </td>
-                                                                <td>
+                                                        </td>
+                                                        <td>
                                                             @Html.DisplayFor(modelItem => item.Last_login)
-                                                                </td>
-                                                                <td>
+                                                        </td>
+                                                        <td>
                                                             @Html.DisplayFor(modelItem => item.Last_logout)
-                                                                </td>
-                                                                <td>
+                                                        </td>
+                                                        <td>
                                                             @Html.DisplayFor(modelItem => item.Asset_num)
-                                                                </td>
-                                                                <td>
+                                                        </td>
+                                                        <td>
                                                             @Html.DisplayFor(modelItem => item.Asset_type)
-                                                                </td>
+                                                        </td>
 
-                                                            </tr>
+                                                    </tr>
                                                 }
                                             </tbody>
                                         </table>
@@ -163,3 +175,8 @@
         <!-- /.row -->
     </div><!-- /.container-fluid -->
 </section>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_Notification");
+}
+}

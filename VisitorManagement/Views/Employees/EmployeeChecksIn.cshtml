@@ -1,14 +1,15 @@
-﻿@*
+﻿@model VisitorManagement.Models.HealthCheck
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
 <style>
-    .body {
-        background-image: url('../../img/bg.png');
+    .body-div {
         background-size: 100% 100%;
         background-attachment: fixed;
         background-size: cover;
+        height: 100%;
     }
 
     .center-screen {
@@ -18,12 +19,6 @@
         align-items: center;
         text-align: center;
         min-height: 100vh;
-    }
-
-    html {
-        height: 100%;
-        background-repeat: no-repeat;
-        /* background-image: linear-gradient(rgb(104, 145, 162), #007AAE);*/
     }
 
     .card-container.card {
@@ -41,14 +36,13 @@
     }
 
     /*
-     * Card component
-     */
+                                                                             * Card component
+                                                                             */
     .card {
-        background-color: #F7F7F7;
         /* just in case there no content*/
         padding: 20px 25px 30px;
         margin: 0 auto 25px;
-        margin-top: 50px;
+        margin-top: 0px;
         /* shadows and rounded borders */
         -moz-border-radius: 2px;
         -webkit-border-radius: 2px;
@@ -69,8 +63,8 @@
     }
 
     /*
-     * Form styles
-     */
+                                                                             * Form styles
+                                                                             */
     .profile-name-card {
         font-size: 16px;
         font-weight: bold;
@@ -175,9 +169,180 @@
         }
 
 </style>
+<div class="center-screen">
+    <div class="card-body">
+        <div class="card card-container" style="background-color:#f4f6f9;">
+
+            <form class="form-signin" method="post" asp-action="VisitorCheckIn" enctype="multipart/form-data">
+
+                <div>
+                    <img width="200" height="150" class="rounded-circle"
+                         src="" />
+                </div>
+
+                <h2>
+                    <b>
+                        Hi <br /> @ViewBag.e_name
+                    </b>
+                </h2>
+                <p>Welcome Back</p>
+                <br>
+                <div style="margin:5px" id="hold">
+                </div>
+                <input type="number" name="temp" asp-for="Temperature" class="form-control" placeholder="Temperature *" value="" required><br>
+                <div class="container">
+                    <h2>Health checker</h2>
+                    <p>Have you experienced any of the following: Yes/No</p>
+                    <table class="table table-head-fixed text-nowrap">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Yes</th>
+                                <th>No</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Fever</td>
+                                <td><label for="q1_fever"><input type="radio" asp-for="Hc_fevor" name="q1_fever" id="q1_fever" value="yes" /></label></td>
+                                <td><label for="q1_fever"><input type="radio" asp-for="Hc_fevor" name="q1_fever" id="q1_fever" value="no" /></label></td>
+                            </tr>
+                            <tr>
+                                <td>Shortness of breath</td>
+                                <td><label for="q1-y"><input class="inputabs" asp-for="Hc_shortness_breath" type="radio" name="q1_breath" id="q1_breath" value="yes" /></label></td>
+                                <td><label for="q1-n"><input class="inputabs" asp-for="Hc_shortness_breath" asp-for="Hc_shortness_breath" type="radio" name="q1_breath" id="q1_breath" value="no" /></label></td>
+                            </tr>
+                            <tr>
+                                <td>Sore throat</td>
+                                <td><label for="q1-y"> <input asp-for="Hc_sore_throat" type="radio" name="q1_throat" id="q1_throat" value="yes" /></label></td>
+                                <td><label for="q1-n"><input asp-for="Hc_sore_throat" type="radio" name="q1_throat" id="q1_throat" value="no" /></label></td>
+                            </tr>
+                            <tr>
+                                <td>Loss of taste or smell</td>
+                                <td><label for="q1-y"><input asp-for="Hc_loss_taste" type="radio" name="q1_taste" id="q1_taste" value="yes" /></label></td>
+                                <td><label for="q1-n"><input asp-for="Hc_loss_taste" type="radio" name="q1_taste" id="q1_taste" value="no" /></label></td>
+                            </tr>
+                            <tr>
+                                <td>Cough</td>
+                                <td><input type="radio" asp-for="Hc_cough" name="q1_cough" id="q1_cough" value="yes" /></td>
+                                <td><input type="radio" asp-for="Hc_cough" name="q1_cough" id="q1_cough" value="no" /></td>
+                            </tr>
+                            <tr>
+                                <td>Muscle Pain</td>
+                                <td><input type="radio" asp-for="Hc_muscle_pain" name="q1_muscle_pain" id="q1_muscle_pain" value="yes" /></td>
+                                <td><input type="radio" asp-for="Hc_muscle_pain" name="q1_muscle_pain" id="q1_muscle_pain" value="no" /></td>
+                            </tr>
+
+                            <tr>
+                                <td>Other (Vomit, Diarrhea, Headache, and e.t.c)</td>
+                                <td><input type="radio" asp-for="Hc_other" name="q1_others" id="q1_others" value="yes" /></td>
+                                <td><input type="radio" asp-for="Hc_other" name="q1_others" id="q1_others" value="no" /></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
 
 
+                </div>
 
-<div class="body">
+                <div>
+                    <table class="table">
+                        <tr>
+                            <td style="text-align: left">
+                                Have you attended any mass gatherings (such as funeral)?
+                            </td>
+                            <td>
+                                <label>
+                                    Yes<input type="radio" asp-for="Hc_visit_gethering" name="q1_funeral" id="q1_funeral"
+                                              value="yes" onclick="gethering('display:block')" />
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    No<input type="radio" name="q1_funeral"
+                                             asp-for="Hc_visit_gethering" id="q1_funeral" value="no" onclick="gethering('display:none')" />
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="visited_gethering" class="input-group" style="margin-bottom: 5px; display:none">
 
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="">If yes Where?</span>
+                        </div>
+                        <input type="text" asp-for="Hc_gethering_place" name="q1_funeral_place" value="" />
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="">Date</span>
+                        </div>
+                        <input type="date" asp-for="Hc_gething_dates" name="q1_funeral_date" value="" />
+
+                    </div>
+                </div>
+
+                <div>
+                    <table class="table">
+                        <tr>
+                            <td style="text-align: left">
+                                Have you been to health care facility in the past 14 days?
+                                <input style="display:none;" type="text" name="otherAnswer" id="otherAnswer" />
+
+                            </td>
+                            <td>
+                                <label>
+                                    Yes<input type="radio" asp-for="Hc_visit_health_facility"
+                                              onclick="healthCare('display:block')"
+                                              name="q1_healthcare" id="q1_hc" value="yes" />
+                                </label>
+
+                            </td>
+                            <td>
+                                <label>
+                                    No<input type="radio" asp-for="Hc_visit_health_facility"
+                                             onclick="healthCare('display:none')"
+                                             name="q1_healthcare" id="q1_healthcare" value="no" />
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="visited_healthcare" class="input-group" style="margin-bottom: 5px; display:none">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="">If yes, Facility Name?</span>
+                        </div>
+                        <input type="text" name="q1_healthcare_place" asp-for="Hc_health_facility_name" id="q1_healthcare_place" value="">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="">Date</span>
+                            <input type="date" asp-for="Hc_health_facility_dates" name="q1_healthcare_date" value="">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <button class="btn btn-lg btn-primary  btn-signin" name="submit" type="submit">Check-In</button>
+            </form><!-- /form -->
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card text-center shadow-lg" style="width: 18rem; background-color: #011100;">
+
+                        <h4 class="text-center">
+                            <a asp-action="Create" style="color: #ffffff">
+                                <strong><i class="fas fa-times-circle"></i>&nbsp; This is not me </strong>
+                            </a>
+                        </h4>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div><!-- /card-container -->
+    </div><!-- /container -->
 </div>
+
+<script>
+    function gethering(s){
+        document.getElementById("visited_gethering").style = s;
+    }
+    function healthCare(s){
+        document.getElementById("visited_healthcare").style = s;
+    }
+</script>

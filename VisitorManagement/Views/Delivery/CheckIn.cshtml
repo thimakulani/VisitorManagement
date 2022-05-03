@@ -1,9 +1,9 @@
-﻿@model VisitorManagement.Models.EmployeeRegister
-@*
+﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
+
 <style>
 
     .body {
@@ -148,40 +148,79 @@
         }
 
 </style>
+
 <div class="body">
     <div class="center-screen">
-        <div class="container">
-            <div class="card card-container">
-                <form class="form-signin" method="post" asp-action="CheckIn">
-                    <h2 class="text-success">
-                        <b>EMPLOYEE CHECK-IN</b>
-                    </h2>
-                    <input type="number" asp-for="EmployeeId" class="form-control" placeholder="Persal Number" required autofocus>
-                    <input type="number" name="temp" class="form-control" asp-for="Temp" placeholder="Temperature" required>
-                    <select class="form-control" name="asset_type" asp-for="Asset_type">
-                        <option class="hidden" selected disabled>
-                            -- Device Type ? --
-                        </option>
-                        <option value="Laptop">Laptop</option>
-                        <option value="Tablet">Tablet</option>
-                        <option value="Cellphone">Cellphone</option>
-                        <option value="Other">Other</option>
-                    </select>
+    <div class="container">
+        <div class="card card-container">
 
-                    <input type="text" asp-for="Asset_num" style="margin-top:7px" name="asset_num" class="form-control"
-                           placeholder="Asset/Serial Number" />
+            <form class="form-signin" method="POST" action="" enctype="multipart/form-data">
+                <h2><b style="color:#0E6185;">DELIVERY</b></h2>
+                <br> <p align="center"><img src="/img/delivery.png" width="128" height="128" border="0" alt="Delivery Login" /></p><br>
 
-                    <div class="card">
-                        <p class="card-text" style="text-align: justify;">Good morning, thank you for your contibution today at LDTCS.</p>
-                    </div>
-                    <button class="btn btn-lg btn-primary btn-block btn-signin" name="submit" type="submit">Check-In</button>
-                </form><!-- /form -->
-            </div><!-- /card-container -->
-        </div>
-    </div>
+
+                <input type="text" name="name" class="form-control" placeholder="Full Name *" value="" required>
+
+                <input type="text" name="identification" class="form-control" placeholder="ID Number*" value=""
+                       required>
+
+                <input type="text" name="company" class="form-control" placeholder="Courier/Company *" value="" required>
+
+
+
+                <textarea name="address" placeholder="Company Address *" class="form-control"></textarea>
+
+
+                <br>
+                <input type="text" name="temp" class="form-control" placeholder="Temperature " value="" required>
+
+
+                <input type="text" name="vnumber" class="form-control" placeholder="Vehicle Registration Number *" value="" required>
+
+                <input type="text" name="phone" class="form-control" placeholder="Phone Number *" value="" required>
+                <select onchange="specify(this.name, this);" class="form-control" name="item" required>
+                    <option class="hidden" selected disabled>
+                        -- Item to Deliver ? --
+                    </option>
+                    <option value="Parcel">Parcel</option>
+                    <option value="Visitors">Visitors</option>
+                    <option value="Letter">Letter</option>
+                    <option value="Food">Food, Water or Groceries</option>
+                    <option value="Hardwares">Computers, Laptops, Printers and/or Cartridges</option>
+
+                    <option value="others">Others</option>
+                </select>
+                <div style="margin-top:5px" id="hold">
+                </div><br>
+                <input type="number" name="qty" class="form-control" placeholder="Quantity *" value="" required>
+                <br>
+                <select class="form-control" name="whom" required>
+                    <option class="hidden" selected disabled>-- Appointment with which person? -- </option>
+                    <option value="Mpho Seriti">
+                        Mpho Seriti
+                    </option>
+                    <option value="Nancy Mogodi">
+                        Nancy Mogodi
+                    </option>
+                    <option value="Ben Gurion">
+                        Ben Gurion
+                    </option>
+                    <option value="Thima">
+                        Thima
+                    </option>
+                    <option value="Thima">
+                        Thima
+                    </option>
+                    <option value="Mara Kriel">
+                        Mara Kriel
+                    </option>
+                </select>
+                <br>
+                <button class="btn btn-primary btn-signin" name="submit" type="submit">Deliver</button>
+            </form><!-- /form -->
+
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+</div><!-- /container -->
+
 </div>
-@section Scripts {
-    @{
-    await Html.RenderPartialAsync("_Notification");
-}
-}

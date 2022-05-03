@@ -36,8 +36,8 @@
     }
 
     /*
-                                                                             * Card component
-                                                                             */
+                                                                                         * Card component
+                                                                                         */
     .card {
         /* just in case there no content*/
         padding: 20px 25px 30px;
@@ -63,8 +63,8 @@
     }
 
     /*
-                                                                             * Form styles
-                                                                             */
+                                                                                         * Form styles
+                                                                                         */
     .profile-name-card {
         font-size: 16px;
         font-weight: bold;
@@ -175,10 +175,10 @@
 
             <form class="form-signin" method="post" asp-action="VisitorCheckIn" enctype="multipart/form-data">
 
-                <div>
+                @*  <div>
                     <img width="200" height="150" class="rounded-circle"
-                         src="" />
-                </div>
+                    src="" />
+                    </div>*@
 
                 <h2>
                     <b>
@@ -187,43 +187,14 @@
                 </h2>
                 <p>Welcome Back</p>
                 <br>
-                <select onchange="specify(this.name, this);" asp-for="AppointmentWith" class="form-control" name="purpose" required>
-                    <option class="hidden" selected disabled>
-                        -- Reason for visiting? --
-                    </option>
-                    <option value="Official">Official</option>
-                    <option value="Contractor">Contractor</option>
-                    <option value="Deliver Documents per Hand">Deliver Documents per Hand</option>
-                    <option value="Event">Event</option>
-                    <option value="Inquiry">Inquiry</option>
-                    <option value="Other">Other</option>
-                </select>
+                <div class="input-group">
+                    @Html.DropDownList("ReasonVisit", (IEnumerable<SelectListItem>)ViewBag.ReasonVisit, "-Reason For Visit- ",htmlAttributes: new { @class = "form-control", id = "ReasonVisit"})
+                </div>
                 <div style="margin:5px" id="hold">
                 </div>
-                <select class="form-control" name="whom" required>
-                    <option class="hidden" selected disabled>
-                        -- Appointment with whom? --
-                    </option>
-                    <option value="Other">Any-Other</option>
-                    <option value="Mpho Seriti">
-                        Mpho Seriti
-                    </option>
-                    <option value="Nancy Mogodi">
-                        Nancy Mogodi
-                    </option>
-                    <option value="Ben Gurion">
-                        Ben Gurion
-                    </option>
-                    <option value="Thima">
-                        Thima
-                    </option>
-                    <option value="Thima">
-                        Thima
-                    </option>
-                    <option value="Mara Kriel">
-                        Mara Kriel
-                    </option>
-                </select>
+                 <div class="input-group">
+                    @Html.DropDownList("WhomToVisit", (IEnumerable<SelectListItem>)ViewBag.WhomToVisit, "-Whom to Visit- ",htmlAttributes: new { @class = "form-control", id = "WhomToVisit"})
+                </div>
                 <div style="margin:5px" id="hold">
                 </div>
                 <input type="number" name="temp" asp-for="Temperature" class="form-control" placeholder="Temperature *" value="" required><br>
@@ -364,7 +335,7 @@
                 <input type="text" name="other_asset_type" asp-for="Asset_type" class="form-control" placeholder="If other, Please specify." />
                 <br>
 
-                <input type="text" name="asset_num" class="form-control" asp-for="Asset_num" placeholder="Asset/Serial Number" value="" required>
+                <input type="text" name="asset_num" class="form-control" asp-for="Asset_num" placeholder="Asset/Serial Number" value="">
                 <button class="btn btn-lg btn-primary  btn-signin" name="submit" type="submit">Check-In</button>
             </form><!-- /form -->
 

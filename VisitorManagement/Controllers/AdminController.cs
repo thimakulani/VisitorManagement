@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Net.Mail;
 using VisitorManagement.Data;
 using VisitorManagement.Models;
 
@@ -48,6 +50,8 @@ namespace VisitorManagement.Controllers
                 var results = await userManager.CreateAsync(user, admin.Password);
                 if (results.Succeeded)
                 {
+
+
                     return RedirectToAction("Index", "Dashboard");
                 }
                 else

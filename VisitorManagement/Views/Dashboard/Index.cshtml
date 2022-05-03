@@ -96,41 +96,75 @@
 
 </div>
 
-<div class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="card text-center shadow-lg" style="background-color: #8BB004;">
-                    <div class="card-body">
-                        <h2 class="card-text btn"><a asp-area="" asp-controller="Visitors" asp-action="CheckIn" style="color: #ffffff"><i class="fas fa-handshake"></i> <strong>&nbsp; Visitors Check-In </strong></a> </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card text-center shadow-lg" style="background-color: #C00000;">
-                    <div class="card-body">
-                        <h2 class="card-text btn"><a asp-area="" asp-controller="Visitors" asp-action="CheckOut" style="color: #ffffff"><strong><i class="fas fa-user-secret"></i>&nbsp; Visitor Check-Out </strong></a> </h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card text-center shadow-lg" style="background-color: #8BB004;">
-                    <div class="card-body">
-                        <h2 class="card-text btn"><a asp-area="" asp-controller="Employees" asp-action="CheckIn" style="color: #ffffff"> <strong><i class="fas fa-address-card"></i>&nbsp; Employee Check-In </strong></a> </h2>
-                    </div>
-                </div>
-            </div>
 
 
-            <div class="col-sm-6">
-                <div class="card text-center shadow-lg" style="background-color: #C00000;">
-                    <div class="card-body">
-                        <h2 class="card-text btn"><a asp-area="" asp-controller="Employees" asp-action="EmployeeChecksIn" style="color: #ffffff"><strong><i class="fas  fa-street-view"></i>&nbsp; Employee Check-Out </strong></a> </h2>
-                    </div>
-                </div>
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-12">
+        <a asp-controller="Visitors" asp-action="CheckIn" class="info-box bg-info">
+            <span class="info-box-icon"><i class="far fa-bookmark"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">VISITOR CHECK-IN</span>
             </div>
-        </div>
+            <!-- /.info-box-content -->
+        </a>
+        <!-- /.info-box -->
     </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <a asp-area="" asp-controller="Visitors" asp-action="CheckOut" class="info-box bg-danger">
+            <span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
 
+            <div class="info-box-content">
+                <span class="info-box-text">VISITOR CHECKS-OUT</span>
+            </div>
+            <!-- /.info-box-content -->
+        </a>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <a asp-area="" asp-controller="Employees" asp-action="CheckIn" class="info-box bg-success">
+            <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">EMPLOYEE CHECK-IN</span>
+
+
+            </div>
+            <!-- /.info-box-content -->
+        </a>
+        <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-12">
+        <a asp-area="" asp-controller="Employees" asp-action="CheckOut" class="info-box bg-danger">
+            <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">EMPLOYEE CHECK-OUT</span>
+
+
+            </div>
+            <!-- /.info-box-content -->
+        </a>
+        <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-12">
+        <a asp-area="" asp-controller="Delivery" asp-action="CheckIn" class="info-box bg-warning">
+            <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">DELIVERY</span>
+            </div>
+            <!-- /.info-box-content -->
+        </a>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
 </div>
-
+<!-- /.row -->
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_Notification");
+}
+}

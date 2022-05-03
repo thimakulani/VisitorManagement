@@ -14,12 +14,12 @@ namespace VisitorManagement.Models
         [DataType(DataType.Time), Display(Name = "CHECKED-OUT")]
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime? Last_logout { get; set; }
-        public string? Type { get; set; }
-        public string? AppointmentWith { get; set; }
-        public double? Temperature { get; set; }
+        public string Type { get; set; }
+        public string AppointmentWith { get; set; }
+        public double Temperature { get; set; }
         public bool Suspend_status { get; set; }
-        public string? Asset_type { get; set; }
-        public string? Asset_num { get; set; }
+        public string Asset_type { get; set; }
+        public string Asset_num { get; set; }
         public bool Hc_fevor { get; set; }
         public bool Hc_shortness_breath { get; set; }
         public bool Hc_sore_throat { get; set; }
@@ -28,15 +28,15 @@ namespace VisitorManagement.Models
         public bool Hc_muscle_pain { get; set; }
         public bool Hc_other { get; set; }
         public bool Hc_visit_gethering { get; set; }
-        public string? Hc_gethering_place { get; set; }
+        public string Hc_gethering_place { get; set; }
         public DateTime? Hc_gething_dates { get; set; }
         public bool Hc_visit_health_facility { get; set; }
-        public string? Hc_health_facility_name { get; set; }
+        public string Hc_health_facility_name { get; set; }
         public DateTime? Hc_health_facility_dates { get; set; }
 
         [Required]
-        public string? VisitorId { get; set; }
+        public string VisitorId { get; set; }
         [Required]
-        public Visitor? Visitor { get; set; }
+        public Visitor Visitor { get; set; }
     }
 }

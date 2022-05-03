@@ -9,6 +9,9 @@
             <thead>
                 <tr>
                     <th>
+                        @Html.DisplayNameFor(model => model.Persal)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.FirstName)
                     </th>
                     <th>
@@ -21,12 +24,6 @@
                         @Html.DisplayNameFor(model => model.Phone)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Staff_status)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Qr_image)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Status)
                     </th>
                     <th></th>
@@ -36,6 +33,9 @@
                 @foreach (var item in Model)
                 {
                     <tr>
+                         <td>
+                            @Html.DisplayFor(modelItem => item.Persal)
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.FirstName)
                         </td>
@@ -47,12 +47,6 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Phone)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Staff_status)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Qr_image)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Status)

@@ -16,6 +16,8 @@ namespace VisitorManagement.Data
         public DbSet<Visitor> Visitor { get; set; }
         public DbSet<EmployeeRegister> EmployeeRegister { get; set; }
         public DbSet<VisitorRegister> VisittorRegister { get; set; }
+        public DbSet<Delivery> Delivery { get; set; }
+        public DbSet<VisitReason> VisitReason { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

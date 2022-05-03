@@ -60,9 +60,7 @@
                             @Html.DisplayFor(modelItem => item.Level)
                         </td>
                         <td>
-                            <a class="btn-sm btn-info" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a class="btn-sm btn-info" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a class="btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            <a class="btn-sm btn-danger" style="display:none" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                         </td>
                     </tr>
                 }
