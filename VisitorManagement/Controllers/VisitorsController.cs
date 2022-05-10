@@ -168,8 +168,8 @@ namespace VisitorManagement.Controllers
             var selected_whom = form["WhomToVisit"];
             ViewData["ReasonVisit"] = PopulateReason(context.VisitReason.ToList(), selected);
             ViewData["WhomToVisit"] = PopulateWhom(context.Employee.ToList(), selected_whom);
-
-            if (context.Temperature.Find(1).Value < data.Temperature)
+            var temperature = context.Temperature.Find(1).Value;
+            if (temperature < data.Temperature)
             {
 
                 bool healthCheck = DoHealthCheck(data);
@@ -187,9 +187,10 @@ namespace VisitorManagement.Controllers
 
                 }
             }
-
-
-
+            else
+            {
+                TempData["error"] = "Visitor's Temperatur is above";
+            }
             return View(data);
         }
 
@@ -201,8 +202,6 @@ namespace VisitorManagement.Controllers
             {
                 return true;
             }
-
-
             return false;
         }
 

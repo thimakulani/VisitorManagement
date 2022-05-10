@@ -36,8 +36,8 @@
     }
 
     /*
-                                                                                         * Card component
-                                                                                         */
+                                                                                                 * Card component
+                                                                                                 */
     .card {
         /* just in case there no content*/
         padding: 20px 25px 30px;
@@ -63,8 +63,8 @@
     }
 
     /*
-                                                                                         * Form styles
-                                                                                         */
+                                                                                                 * Form styles
+                                                                                                 */
     .profile-name-card {
         font-size: 16px;
         font-weight: bold;
@@ -192,7 +192,7 @@
                 </div>
                 <div style="margin:5px" id="hold">
                 </div>
-                 <div class="input-group">
+                <div class="input-group">
                     @Html.DropDownList("WhomToVisit", (IEnumerable<SelectListItem>)ViewBag.WhomToVisit, "-Whom to Visit- ",htmlAttributes: new { @class = "form-control", id = "WhomToVisit"})
                 </div>
                 <div style="margin:5px" id="hold">
@@ -366,3 +366,9 @@
         document.getElementById("visited_healthcare").style = s;
     }
 </script>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_Notification");
+}
+}

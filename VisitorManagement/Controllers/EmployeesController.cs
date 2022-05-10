@@ -78,6 +78,7 @@ namespace VisitorManagement.Controllers
         }
         public IActionResult EmployeeChecksIn()
         {
+
             return View();
         }
         [HttpPost]
@@ -168,7 +169,7 @@ namespace VisitorManagement.Controllers
             }
             return View(viewModel);
         }
-      
+
         public IActionResult CheckOut()
         {
             return View();

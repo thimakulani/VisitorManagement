@@ -1,11 +1,11 @@
 ﻿@inject SignInManager<Admin> identityUser;
 @{
-    @if (!identityUser.IsSignedIn(User))
+    @if (identityUser.IsSignedIn(User))
     {
         Layout = "_Layout";
     }
     else
     {
-       Layout = "_Layout"; 
+        Layout = "_Login";
     }
 }
