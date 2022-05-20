@@ -9,7 +9,7 @@ namespace VisitorManagement.Controllers
 {
     public class VisitorsController : Controller
     {
-        AppDBContext context;
+        private readonly AppDBContext context;
         public VisitorsController(AppDBContext context)
         {
             this.context = context;
@@ -23,7 +23,7 @@ namespace VisitorManagement.Controllers
         public IActionResult Report()
         {
             var visitor = context.Visitor.ToList();
-            var visitor_register = context.VisittorRegister.ToList();
+            var visitor_register = context.VisitorRegister.ToList();
 
             var results = (from v_r in visitor_register
                            join v in visitor on v_r.VisitorId equals v.Id
@@ -61,17 +61,22 @@ namespace VisitorManagement.Controllers
                     v.Status = "signed out";
                     context.Visitor.Update(v);
 
-                    var v_r = context.VisittorRegister.FirstOrDefault(x => x.Last_logout == null && x.VisitorId == visitor.Id);
+                    var v_r = context.VisitorRegister.FirstOrDefault(x => x.Last_logout == null && x.VisitorId == visitor.Id);
                     v_r.Last_logout = DateTime.Now;
-                    context.VisittorRegister.Update(v_r);
+                    context.VisitorRegister.Update(v_r);
                     context.SaveChanges();
-
+                    TempData["success"] = "Successfully signed out";
+                    return RedirectToAction("Acknowladge");
                 }
                 else
                 {
                     TempData["error"] = "Visitor already signed out";
                 }
             }
+            return View();
+        }
+        public IActionResult Acknowladge()
+        {
             return View();
         }
 
@@ -85,11 +90,12 @@ namespace VisitorManagement.Controllers
                 {
                     context.Visitor.Add(visitor);
                     context.SaveChanges();
-                    RedirectToAction("Index");
+                    TempData["success"] = "Successfully created";
+                    return RedirectToAction("Index");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Id Number already exists");
+                    ModelState.AddModelError("", "Id number already exists");
                 }
             }
 
@@ -108,18 +114,25 @@ namespace VisitorManagement.Controllers
                 var results = context.Visitor.Find(visitor.Id);
                 if (results != null)
                 {
+                    if (results.Status == "signed in")
+                    {
+                        TempData["error"] = "Visitor already signed in, please sign out visitor, before he/she can be signed in again";
+                        return RedirectToAction("CheckOut");
+                    }
+                    
                     return RedirectToAction("VisitorCheckIn", "Visitors", results);
                 }
                 else
                 {
+                    TempData["error"] = "Id number not registered";
                     ModelState.AddModelError("", "Visitor is not registred");
                 }
             }
             return View(visitor);
         }
-        private List<SelectListItem> PopulateReason(List<VisitReason> data, string selected)
+        private static List<SelectListItem> PopulateReason(List<VisitReason> data, string selected)
         {
-            List<SelectListItem> listItems = new List<SelectListItem>();
+            List<SelectListItem> listItems = new();
             foreach (var item in data)
             {
                 if (selected == item.Name)
@@ -133,10 +146,12 @@ namespace VisitorManagement.Controllers
             }
             return listItems;
         }
-        private List<SelectListItem> PopulateWhom(List<Employee> data, string selected)
+        private static List<SelectListItem> PopulateWhom(List<Employee> data, string selected)
         {
-            List<SelectListItem> listItems = new List<SelectListItem>();
-            listItems.Add(new SelectListItem { Text = "Other", Selected = false });
+            List<SelectListItem> listItems = new()
+            {
+                new SelectListItem { Text = "Other", Selected = false }
+            };
             foreach (var item in data)
             {
                 if (selected == $"{item.FirstName} {item.LastName}")
@@ -169,32 +184,37 @@ namespace VisitorManagement.Controllers
             ViewData["ReasonVisit"] = PopulateReason(context.VisitReason.ToList(), selected);
             ViewData["WhomToVisit"] = PopulateWhom(context.Employee.ToList(), selected_whom);
             var temperature = context.Temperature.Find(1).Value;
-            if (temperature < data.Temperature)
+            if (temperature >= data.Temperature)
             {
 
                 bool healthCheck = DoHealthCheck(data);
                 var ll = DateTime.Now;
                 data.Last_login = ll;
-
+                data.AppointmentWith = selected_whom;
+                data.ReasonVisit = selected;
                 data.VisitorId = HttpContext.Session.GetString("Id");
                 if (data.VisitorId != null)
                 {
                     var visitor = context.Visitor.Find(data.VisitorId);
                     visitor.Status = "signed in";
-                    context.VisittorRegister.Add(data);
+                    context.VisitorRegister.Add(data);
                     context.Visitor.Update(visitor);
                     context.SaveChanges();
-
+                    TempData["success"] = "Visitor is successfully logged it";
+                    return RedirectToAction("CheckIn");
                 }
             }
             else
             {
                 TempData["error"] = "Visitor's Temperatur is above";
+
+
             }
+            ViewBag.v_name = context.Visitor.Find(HttpContext.Session.GetString("Id"));
             return View(data);
         }
 
-        private bool DoHealthCheck(VisitorRegister data)
+        private static bool DoHealthCheck(VisitorRegister data)
         {
             if (data.Hc_cough && data.Hc_fevor && data.Hc_loss_taste
                 && data.Hc_muscle_pain && data.Hc_other && data.Hc_shortness_breath

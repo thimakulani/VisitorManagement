@@ -13,18 +13,20 @@ builder.Services.AddMvc();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDistributedMemoryCache();//To Store session in Memory, This is default implementation of IDistributedCache    
 builder.Services.AddSession();
+
+
 builder.Services.AddMailKit(optionBuilder =>
 {
     optionBuilder.UseMailKit(new MailKitOptions()
     {
         //get options from sercets.json
-        Server = builder.Configuration["Server"],
-        Port = Convert.ToInt32(builder.Configuration["Port"]),
-        SenderName = builder.Configuration["SenderName"],
-        SenderEmail = builder.Configuration["SenderEmail"],
+        Server = "smtp.gmail.com",
+        Port = 25,
+        SenderName = "VISITOR MANAGEMENT",
+        SenderEmail = "sigauquetk@gmail.com",
         //can be optional with no authentication 
-        Account = builder.Configuration["Account"],
-        Password = builder.Configuration["Password"],
+        Account = "sigauquetk@gmail.com",
+        Password = "THIma$!305",
         Security = true,
 
     });

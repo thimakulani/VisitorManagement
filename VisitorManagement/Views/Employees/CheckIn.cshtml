@@ -1,4 +1,4 @@
-﻿@model VisitorManagement.Models.EmployeeRegister
+﻿@model VisitorManagement.Service.EmployeeCheckInViewModel
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -156,9 +156,9 @@
                     <h2 class="text-success">
                         <b>EMPLOYEE CHECK-IN</b>
                     </h2>
-                    <input type="number" asp-for="EmployeeId" class="form-control" placeholder="Persal Number" required autofocus>
-                    <input type="number" name="temp" class="form-control" asp-for="Temp" placeholder="Temperature" required>
-                    <select class="form-control" name="asset_type" asp-for="Asset_type">
+                    <input type="number" asp-for="Percal" class="form-control" placeholder="Persal Number" required autofocus>
+                    <input type="number" class="form-control" asp-for="Temperature" placeholder="Temperature" required>
+                    <select class="form-control" asp-for="AssetType">
                         <option class="hidden" selected disabled>
                             -- Device Type ? --
                         </option>
@@ -168,7 +168,7 @@
                         <option value="Other">Other</option>
                     </select>
 
-                    <input type="text" asp-for="Asset_num" style="margin-top:7px" name="asset_num" class="form-control"
+                    <input type="text" asp-for="AssetNumber" style="margin-top:7px" class="form-control"
                            placeholder="Asset/Serial Number" />
 
                     <div class="card">

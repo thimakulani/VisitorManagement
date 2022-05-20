@@ -8,6 +8,7 @@ namespace VisitorManagement.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), DisplayName("Id#")]
         public int Id { get; set; }
+        
         public double? Temperature { get; set; }
         public string Hc_fevor { get; set; }
         public string Hc_shortness_breath { get; set; }

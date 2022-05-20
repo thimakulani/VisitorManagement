@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VisitorManagement.Data;
 
@@ -11,9 +12,10 @@ using VisitorManagement.Data;
 namespace VisitorManagement.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20220519072446_update_temp_column_2")]
+    partial class update_temp_column_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -336,12 +338,6 @@ namespace VisitorManagement.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("HealthCheckId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HeathCheckId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("Last_login")
                         .HasColumnType("datetime2");
 
@@ -357,8 +353,6 @@ namespace VisitorManagement.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("EmployeeId");
-
-                    b.HasIndex("HealthCheckId");
 
                     b.ToTable("EmployeeRegister");
                 });
@@ -637,13 +631,7 @@ namespace VisitorManagement.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VisitorManagement.Models.HealthCheck", "HealthCheck")
-                        .WithMany()
-                        .HasForeignKey("HealthCheckId");
-
                     b.Navigation("Employee");
-
-                    b.Navigation("HealthCheck");
                 });
 
             modelBuilder.Entity("VisitorManagement.Models.HealthCheck", b =>

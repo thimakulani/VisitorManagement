@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.Extensions.Primitives;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -33,6 +34,7 @@ namespace VisitorManagement.Models
         public bool Hc_visit_health_facility { get; set; }
         public string Hc_health_facility_name { get; set; }
         public DateTime? Hc_health_facility_dates { get; set; }
+        public string ReasonVisit { get; set; }
 
         [Required]
         public string VisitorId { get; set; }

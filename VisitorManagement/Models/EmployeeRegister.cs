@@ -8,7 +8,7 @@ namespace VisitorManagement.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), DisplayName("Id#")]
         public int Id { get; set; }
-        public string Temp { get; set; }
+        public double Temp { get; set; }
         public DateTime? Last_login { get; set; }
         public DateTime? Last_logout { get; set; }
         public bool Suspend_status { get; set; }
@@ -16,5 +16,7 @@ namespace VisitorManagement.Models
         public string Asset_type { get; set; }
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
+        public int HeathCheckId { get; set; }
+        public HealthCheck HealthCheck { get; set; }
     }
 }

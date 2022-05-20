@@ -15,7 +15,7 @@ namespace VisitorManagement.Data
         public DbSet<Temperature> Temperature { get; set; }
         public DbSet<Visitor> Visitor { get; set; }
         public DbSet<EmployeeRegister> EmployeeRegister { get; set; }
-        public DbSet<VisitorRegister> VisittorRegister { get; set; }
+        public DbSet<VisitorRegister> VisitorRegister { get; set; }
         public DbSet<Delivery> Delivery { get; set; }
         public DbSet<VisitReason> VisitReason { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)

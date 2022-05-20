@@ -76,23 +76,70 @@ namespace VisitorManagement.Controllers
             }
             return View();
         }
-        public IActionResult EmployeeChecksIn()
+        public IActionResult EmployeeChecksIn(EmployeeCheckInViewModel viewModel)
         {
+            var names = HttpContext.Session.GetString("Names");
+            ViewBag.e_name = names;
+            ViewBag.Temp = viewModel.Temperature;
 
-            return View();
-        }
-        [HttpPost]
-        public IActionResult EmployeeChecksIn(EmployeeRegister viewModel)
-        {
-            HttpContext.Session.SetInt32("Persal", viewModel.EmployeeId);
-            return View();
-        }
-        [HttpPost]
-        public IActionResult CheckIn(EmployeeRegister viewModel)
-        {
-            if (viewModel.EmployeeId > 0)
+            HttpContext.Session.SetInt32("EmployeeId", viewModel.Percal);
+            
+            HttpContext.Session.SetString("Temp", viewModel.Temperature.ToString().Trim());
+            if (viewModel.AssetType !=null && viewModel.AssetType !=null) 
             {
-                var emp = context.Employee.Find(viewModel.EmployeeId);
+                HttpContext.Session.SetString("Asset_num", viewModel.AssetNumber);
+                HttpContext.Session.SetString("Asset_type", viewModel.AssetType);
+            }
+            EmployeeRegister employee_reg = new()
+            {
+                EmployeeId = viewModel.Percal,
+                Temp = viewModel.Temperature,
+                Asset_num = viewModel.AssetNumber,
+                Asset_type = viewModel.AssetType,
+
+            };
+             
+
+            return View(employee_reg);
+        }
+        [HttpPost]
+        public IActionResult EmployeeChecksIn(EmployeeRegister model, IFormCollection form)
+        {
+            var d_t = DateTime.Now;
+            var emp = context.Employee.Find(model.EmployeeId);
+            if(emp != null)
+            {
+                emp.LastCheckIn = d_t;
+                emp.Status = "signed in";
+                context.Employee.Update(emp);
+            }
+            model.Last_login = d_t;
+            context.EmployeeRegister.Add(model);
+            context.SaveChanges();
+            TempData["success"] = "Successfully logged in";
+            //var EMP_REG = context.EmployeeRegister.Where(x => x.EmployeeId == viewModel.EmployeeId && x.Last_login.Value.Date == emp.LastCheckIn.Value.Date);
+            
+            //var data = new EmployeeRegister()
+            //{
+            //    Temp = double.Parse(HttpContext.Session.GetString("Temp")),
+            //    Asset_num = HttpContext.Session.GetString("Asset_num"),
+            //    EmployeeId = (int)HttpContext.Session.GetInt32("EmployeeId"),
+            //    Asset_type = HttpContext.Session.GetString("Asset_type"),
+            //    Last_login = d_t,
+                
+            //};
+
+            //healthCheck.EmployeeId = data.EmployeeId;
+            //context.EmployeeRegister.Add(data);
+            //context.HealthCheck.Add(healthCheck);
+            return View();
+        }
+        [HttpPost]
+        public IActionResult CheckIn(EmployeeCheckInViewModel viewModel)
+        {
+            if (viewModel.Percal > 0)
+            {
+                var emp = context.Employee.Find(viewModel.Percal);
 
                 if (emp != null)
                 {
@@ -108,23 +155,36 @@ namespace VisitorManagement.Controllers
                                 //create temperature session
                                 //asset name  session
                                 //create asset number session
-                                ViewBag.e_name = $"{emp.FirstName} {emp.LastName}";
+                               
+                                HttpContext.Session.SetString("Names", $"{emp.FirstName} {emp.LastName}");
+                                
+
                                 return RedirectToAction("EmployeeChecksIn", viewModel);//with healthcheck
                             }
                             else
                             {
                                 var d_t = DateTime.Now;
-                                var EMP_REG = context.EmployeeRegister.Where(x => x.EmployeeId == viewModel.EmployeeId && x.Last_login.Value.Date == emp.LastCheckIn.Value.Date);
+                                //var EMP_REG = context.EmployeeRegister.Where(x => x.EmployeeId == viewModel.EmployeeId && x.Last_login.Value.Date == emp.LastCheckIn.Value.Date);
                                 emp.Status = "signed in";
                                 emp.LastCheckIn = d_t;
 
                                 //FIND LAST CHECKED IN FROM REGISTER
+                                EmployeeRegister employeeRegister = new EmployeeRegister()
+                                {
+                                    Asset_num = viewModel.AssetNumber,
+                                    EmployeeId = viewModel.Percal,
+                                    Temp = viewModel.Temperature,
+                                    Last_login = d_t,
+                                    HealthCheck = null
+                                };
 
-                                viewModel.Last_login = d_t;
+
+
+                                //viewModel.Last_login = d_t;
 
 
                                 context.Employee.Update(emp);
-                                context.EmployeeRegister.Add(viewModel);
+                                context.EmployeeRegister.Add(employeeRegister);
                                 context.SaveChanges();
                                 TempData["success"] = "Employee successfully checked in";
                                 return RedirectToAction("CheckIn");
@@ -132,11 +192,9 @@ namespace VisitorManagement.Controllers
                         }
                         else
                         {
-                            ViewBag.e_name = $"{emp.FirstName} {emp.LastName}";
+                            HttpContext.Session.SetString("Names", $"{emp.FirstName} {emp.LastName}");
                             return RedirectToAction("EmployeeChecksIn", viewModel);
                         }
-
-
                     }
                     else
                     {

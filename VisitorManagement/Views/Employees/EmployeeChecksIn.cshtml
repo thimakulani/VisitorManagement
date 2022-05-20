@@ -1,4 +1,4 @@
-﻿@model VisitorManagement.Models.HealthCheck
+﻿@model VisitorManagement.Models.EmployeeRegister
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -173,8 +173,11 @@
     <div class="card-body">
         <div class="card card-container" style="background-color:#f4f6f9;">
 
-            <form class="form-signin" method="post" asp-action="VisitorCheckIn" enctype="multipart/form-data">
-
+            <form class="form-signin" method="post" asp-action="EmployeeChecksIn" enctype="multipart/form-data">
+                <input type="hidden" asp-for="EmployeeId" />
+                <input type="hidden" asp-for="Asset_num" />
+                <input type="hidden" asp-for="Asset_type" />
+                <input type="hidden" asp-for="Temp" />
                 <div>
                     <img width="200" height="150" class="rounded-circle"
                          src="" />
@@ -189,7 +192,7 @@
                 <br>
                 <div style="margin:5px" id="hold">
                 </div>
-                <input type="number" name="temp" asp-for="Temperature" class="form-control" placeholder="Temperature *" value="" required><br>
+                <input type="number" asp-for="HealthCheck.Temperature" class="form-control" placeholder="Temperature *" value="@ViewBag.Temp" required><br>
                 <div class="container">
                     <h2>Health checker</h2>
                     <p>Have you experienced any of the following: Yes/No</p>
@@ -204,39 +207,39 @@
                         <tbody>
                             <tr>
                                 <td>Fever</td>
-                                <td><label for="q1_fever"><input type="radio" asp-for="Hc_fevor" name="q1_fever" id="q1_fever" value="yes" /></label></td>
-                                <td><label for="q1_fever"><input type="radio" asp-for="Hc_fevor" name="q1_fever" id="q1_fever" value="no" /></label></td>
+                                <td><label for="q1_fever"><input type="radio" asp-for="HealthCheck.Hc_fevor" name="q1_fever" id="q1_fever" value="yes" /></label></td>
+                                <td><label for="q1_fever"><input type="radio" asp-for="HealthCheck.Hc_fevor" name="q1_fever" id="q1_fever" value="no" /></label></td>
                             </tr>
                             <tr>
                                 <td>Shortness of breath</td>
-                                <td><label for="q1-y"><input class="inputabs" asp-for="Hc_shortness_breath" type="radio" name="q1_breath" id="q1_breath" value="yes" /></label></td>
-                                <td><label for="q1-n"><input class="inputabs" asp-for="Hc_shortness_breath" asp-for="Hc_shortness_breath" type="radio" name="q1_breath" id="q1_breath" value="no" /></label></td>
+                                <td><label for="q1-y"><input class="inputabs" asp-for="HealthCheck.Hc_shortness_breath" type="radio" name="q1_breath" id="q1_breath" value="yes" /></label></td>
+                                <td><label for="q1-n"><input class="inputabs" asp-for="HealthCheck.Hc_shortness_breath" asp-for="HealthCheck.Hc_shortness_breath" type="radio" name="q1_breath" id="q1_breath" value="no" /></label></td>
                             </tr>
                             <tr>
                                 <td>Sore throat</td>
-                                <td><label for="q1-y"> <input asp-for="Hc_sore_throat" type="radio" name="q1_throat" id="q1_throat" value="yes" /></label></td>
-                                <td><label for="q1-n"><input asp-for="Hc_sore_throat" type="radio" name="q1_throat" id="q1_throat" value="no" /></label></td>
+                                <td><label for="q1-y"> <input asp-for="HealthCheck.Hc_sore_throat" type="radio" name="q1_throat" id="q1_throat" value="yes" /></label></td>
+                                <td><label for="q1-n"><input asp-for="HealthCheck.Hc_sore_throat" type="radio" name="q1_throat" id="q1_throat" value="no" /></label></td>
                             </tr>
                             <tr>
                                 <td>Loss of taste or smell</td>
-                                <td><label for="q1-y"><input asp-for="Hc_loss_taste" type="radio" name="q1_taste" id="q1_taste" value="yes" /></label></td>
-                                <td><label for="q1-n"><input asp-for="Hc_loss_taste" type="radio" name="q1_taste" id="q1_taste" value="no" /></label></td>
+                                <td><label for="q1-y"><input asp-for="HealthCheck.Hc_loss_taste" type="radio" name="q1_taste" id="q1_taste" value="yes" /></label></td>
+                                <td><label for="q1-n"><input asp-for="HealthCheck.Hc_loss_taste" type="radio" name="q1_taste" id="q1_taste" value="no" /></label></td>
                             </tr>
                             <tr>
                                 <td>Cough</td>
-                                <td><input type="radio" asp-for="Hc_cough" name="q1_cough" id="q1_cough" value="yes" /></td>
-                                <td><input type="radio" asp-for="Hc_cough" name="q1_cough" id="q1_cough" value="no" /></td>
+                                <td><input type="radio" asp-for="HealthCheck.Hc_cough" name="q1_cough" id="q1_cough" value="yes" /></td>
+                                <td><input type="radio" asp-for="HealthCheck.Hc_cough" name="q1_cough" id="q1_cough" value="no" /></td>
                             </tr>
                             <tr>
                                 <td>Muscle Pain</td>
-                                <td><input type="radio" asp-for="Hc_muscle_pain" name="q1_muscle_pain" id="q1_muscle_pain" value="yes" /></td>
-                                <td><input type="radio" asp-for="Hc_muscle_pain" name="q1_muscle_pain" id="q1_muscle_pain" value="no" /></td>
+                                <td><input type="radio" asp-for="HealthCheck.Hc_muscle_pain" name="q1_muscle_pain" id="q1_muscle_pain" value="yes" /></td>
+                                <td><input type="radio" asp-for="HealthCheck.Hc_muscle_pain" name="q1_muscle_pain" id="q1_muscle_pain" value="no" /></td>
                             </tr>
 
                             <tr>
                                 <td>Other (Vomit, Diarrhea, Headache, and e.t.c)</td>
-                                <td><input type="radio" asp-for="Hc_other" name="q1_others" id="q1_others" value="yes" /></td>
-                                <td><input type="radio" asp-for="Hc_other" name="q1_others" id="q1_others" value="no" /></td>
+                                <td><input type="radio" asp-for="HealthCheck.Hc_other" name="q1_others" id="q1_others" value="yes" /></td>
+                                <td><input type="radio" asp-for="HealthCheck.Hc_other" name="q1_others" id="q1_others" value="no" /></td>
                             </tr>
 
                         </tbody>
@@ -253,14 +256,14 @@
                             </td>
                             <td>
                                 <label>
-                                    Yes<input type="radio" asp-for="Hc_visit_gethering" name="q1_funeral" id="q1_funeral"
+                                    Yes<input type="radio" asp-for="HealthCheck.Hc_visit_gethering" name="q1_funeral" id="q1_funeral"
                                               value="yes" onclick="gethering('display:block')" />
                                 </label>
                             </td>
                             <td>
                                 <label>
                                     No<input type="radio" name="q1_funeral"
-                                             asp-for="Hc_visit_gethering" id="q1_funeral" value="no" onclick="gethering('display:none')" />
+                                             asp-for="HealthCheck.Hc_visit_gethering" id="q1_funeral" value="no" onclick="gethering('display:none')" />
                                 </label>
                             </td>
                         </tr>
@@ -270,11 +273,11 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="">If yes Where?</span>
                         </div>
-                        <input type="text" asp-for="Hc_gethering_place" name="q1_funeral_place" value="" />
+                        <input type="text" asp-for="HealthCheck.Hc_gethering_place" name="q1_funeral_place" value="" />
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="">Date</span>
                         </div>
-                        <input type="date" asp-for="Hc_gething_dates" name="q1_funeral_date" value="" />
+                        <input type="date" asp-for="HealthCheck.Hc_gething_dates" name="q1_funeral_date" value="" />
 
                     </div>
                 </div>
@@ -289,7 +292,7 @@
                             </td>
                             <td>
                                 <label>
-                                    Yes<input type="radio" asp-for="Hc_visit_health_facility"
+                                    Yes<input type="radio" asp-for="HealthCheck.Hc_visit_health_facility"
                                               onclick="healthCare('display:block')"
                                               name="q1_healthcare" id="q1_hc" value="yes" />
                                 </label>
@@ -297,7 +300,7 @@
                             </td>
                             <td>
                                 <label>
-                                    No<input type="radio" asp-for="Hc_visit_health_facility"
+                                    No<input type="radio" asp-for="HealthCheck.Hc_visit_health_facility"
                                              onclick="healthCare('display:none')"
                                              name="q1_healthcare" id="q1_healthcare" value="no" />
                                 </label>
@@ -308,10 +311,10 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="">If yes, Facility Name?</span>
                         </div>
-                        <input type="text" name="q1_healthcare_place" asp-for="Hc_health_facility_name" id="q1_healthcare_place" value="">
+                        <input type="text" name="q1_healthcare_place" asp-for="HealthCheck.Hc_health_facility_name" id="q1_healthcare_place" value="">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="">Date</span>
-                            <input type="date" asp-for="Hc_health_facility_dates" name="q1_healthcare_date" value="">
+                            <input type="date" asp-for="HealthCheck.Hc_health_facility_dates" name="q1_healthcare_date" value="">
                         </div>
                     </div>
                 </div>

@@ -29,22 +29,8 @@ namespace VisitorManagement.Controllers
             model.EmployeeCheckIn = context.EmployeeRegister.Where(x => x.Last_login.Value.Date == DateTime.Now.Date).Count();
             model.EmployeeCheckout = context.EmployeeRegister.Where(x => x.Last_logout.Value.Date == DateTime.Now.Date).Count();
 
-            model.VisitorCheckIn = context.VisittorRegister.Where(x => x.Last_login.Value.Date == DateTime.Now.Date).Count();
-            model.VisitorCheckOut = context.VisittorRegister.Where(x => x.Last_logout.Value.Date == DateTime.Now.Date).Count();
-
-            try
-            {
-
-                
-
-                _EmailService.Send("thimakulani@gmail.com", "msg", "message");
-            }
-            catch (Exception ex)
-            {
-                TempData["_Notification"] = ex.Message;
-            }
-
-
+            model.VisitorCheckIn = context.VisitorRegister.Where(x => x.Last_login.Value.Date == DateTime.Now.Date).Count();
+            model.VisitorCheckOut = context.VisitorRegister.Where(x => x.Last_logout.Value.Date == DateTime.Now.Date).Count();
             return View(model);
         }
         [HttpPost]
