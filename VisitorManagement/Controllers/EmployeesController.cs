@@ -177,12 +177,6 @@ namespace VisitorManagement.Controllers
                                     Last_login = d_t,
                                     HealthCheck = null
                                 };
-
-
-
-                                //viewModel.Last_login = d_t;
-
-
                                 context.Employee.Update(emp);
                                 context.EmployeeRegister.Add(employeeRegister);
                                 context.SaveChanges();
@@ -223,7 +217,7 @@ namespace VisitorManagement.Controllers
             }
             else
             {
-                TempData["error"] = "Invalid Persal Number";
+                TempData["error"] = "Persal not registered";
             }
             return View(viewModel);
         }
@@ -232,5 +226,31 @@ namespace VisitorManagement.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult CheckOut(Employee employee)
+        {
+            if (ModelState.IsValid)
+            {
+                var emp = context.Employee.Find(employee.Persal);
+                if(emp != null)
+                {
+                    var dt = DateTime.Now;
+                    var emp_reg = context.EmployeeRegister.Single(x => x.EmployeeId == emp.Persal && x.Last_login == emp.LastCheckIn);
+                    emp.LastCheckOut = dt;
+                    emp_reg.Last_logout = dt;
+                    emp.Status = "signed out";
+                    context.Employee.Update(emp);
+                    context.SaveChanges();
+                    ModelState.Clear();
+                    TempData["success"] = "Successfully Logged out";
+                }
+            }
+            return View(employee);
+        }
+        public IActionResult Acknowladge()
+        {
+            return View();
+        }
+
     }
 }

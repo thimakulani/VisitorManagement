@@ -22,6 +22,7 @@ namespace VisitorManagement.Models
         [DisplayName("Status")]
         public string Status { get; set; }
         public DateTime? LastCheckIn { get; set; }
+        public DateTime? LastCheckOut { get; set; }
         public ICollection<EmployeeRegister> EmployeeRegisters { get; set; }
     }
 }
