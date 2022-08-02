@@ -31,9 +31,10 @@ builder.Services.AddMailKit(optionBuilder =>
 
     });
 });
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
 builder.Services.AddDbContext<AppDBContext>(option =>
 
-    option.UseSqlServer(
+     option.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection")
         )
 );
